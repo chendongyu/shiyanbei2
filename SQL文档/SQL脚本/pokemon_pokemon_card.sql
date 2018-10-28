@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.13, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: pokemon_db
+-- Host: localhost    Database: pokemon
 -- ------------------------------------------------------
 -- Server version	8.0.13
 
@@ -38,6 +38,7 @@ CREATE TABLE `pokemon_card` (
 
 LOCK TABLES `pokemon_card` WRITE;
 /*!40000 ALTER TABLE `pokemon_card` DISABLE KEYS */;
+INSERT INTO `pokemon_card` VALUES ('01','Pikachu',3,3,2),('02','Bulbasaur',4,4,1),('03','Charmander',1,3,2),('04','Squirtle',6,3,1),('05','Machop',7,2,2),('06','Rattata',7,2,1),('07','Poliwag',6,2,1),('08','Bellsprout',4,1,1),('09','Geodude',5,4,1),('10','Gloom',4,2,1),('11','Mankey',7,3,2),('12','Gastly',8,1,1),('13','Slowpoke',8,2,1),('14','Voltorb',3,1,3),('15','Hitmonlee',7,2,3),('16','Horseaa',6,2,1),('17','Scyther',7,3,3),('18','Staryu',6,2,1),('19','Drowzee',8,3,1),('20','Caterpie',4,1,1);
 /*!40000 ALTER TABLE `pokemon_card` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-28  0:23:17
+-- Dump completed on 2018-10-28  0:52:42

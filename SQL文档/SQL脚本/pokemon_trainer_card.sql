@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.13, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: pokemon_db
+-- Host: localhost    Database: pokemon
 -- ------------------------------------------------------
 -- Server version	8.0.13
 
@@ -16,13 +16,13 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `energy_card`
+-- Table structure for table `trainer_card`
 --
 
-DROP TABLE IF EXISTS `energy_card`;
+DROP TABLE IF EXISTS `trainer_card`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `energy_card` (
+CREATE TABLE `trainer_card` (
   `CARD_ID` varchar(5) NOT NULL,
   `TYPE` int(2) DEFAULT NULL,
   `TODO` varchar(5) DEFAULT NULL,
@@ -31,12 +31,13 @@ CREATE TABLE `energy_card` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `energy_card`
+-- Dumping data for table `trainer_card`
 --
 
-LOCK TABLES `energy_card` WRITE;
-/*!40000 ALTER TABLE `energy_card` DISABLE KEYS */;
-/*!40000 ALTER TABLE `energy_card` ENABLE KEYS */;
+LOCK TABLES `trainer_card` WRITE;
+/*!40000 ALTER TABLE `trainer_card` DISABLE KEYS */;
+INSERT INTO `trainer_card` VALUES ('1',1,'Ash'),('2',2,'Brock');
+/*!40000 ALTER TABLE `trainer_card` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -48,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-28  0:23:18
+-- Dump completed on 2018-10-28  0:52:40
