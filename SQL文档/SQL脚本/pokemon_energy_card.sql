@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.13, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: pokemon_db
+-- Host: localhost    Database: pokemon
 -- ------------------------------------------------------
 -- Server version	8.0.13
 
@@ -16,31 +16,28 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `deck`
+-- Table structure for table `energy_card`
 --
 
-DROP TABLE IF EXISTS `deck`;
+DROP TABLE IF EXISTS `energy_card`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `deck` (
-  `DECK_ID` varchar(5) NOT NULL,
-  `POKEMON_ID` varchar(5) NOT NULL,
-  `POKEMON_NUM` int(2) DEFAULT NULL,
-  `ENERGY_ID` varchar(5) DEFAULT NULL,
-  `ENERGY_NUM` int(2) DEFAULT NULL,
-  `TRAINER_ID` varchar(5) DEFAULT NULL,
-  `TRAINER_NUM` int(2) DEFAULT NULL,
-  PRIMARY KEY (`DECK_ID`,`POKEMON_ID`)
+CREATE TABLE `energy_card` (
+  `CARD_ID` varchar(5) NOT NULL,
+  `TYPE` int(2) DEFAULT NULL,
+  `TODO` varchar(5) DEFAULT NULL,
+  PRIMARY KEY (`CARD_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `deck_card_inner`
+-- Dumping data for table `energy_card`
 --
 
-LOCK TABLES `deck` WRITE;
-/*!40000 ALTER TABLE `deck` DISABLE KEYS */;
-/*!40000 ALTER TABLE `deck` ENABLE KEYS */;
+LOCK TABLES `energy_card` WRITE;
+/*!40000 ALTER TABLE `energy_card` DISABLE KEYS */;
+INSERT INTO `energy_card` VALUES ('1',1,'Fire'),('2',2,'Ice'),('3',3,'Elec'),('4',4,'Plant'),('5',5,'Grd'),('6',6,'Water'),('7',7,'Fight'),('8',8,'Psy');
+/*!40000 ALTER TABLE `energy_card` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -52,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-28  0:23:16
+-- Dump completed on 2018-10-28  0:52:41

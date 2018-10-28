@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.13, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: pokemon_db
+-- Host: localhost    Database: pokemon
 -- ------------------------------------------------------
 -- Server version	8.0.13
 
@@ -16,29 +16,28 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `pokemon_card`
+-- Table structure for table `trainer_card`
 --
 
-DROP TABLE IF EXISTS `pokemon_card`;
+DROP TABLE IF EXISTS `trainer_card`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `pokemon_card` (
+CREATE TABLE `trainer_card` (
   `CARD_ID` varchar(5) NOT NULL,
-  `NAME` varchar(20) DEFAULT NULL,
   `TYPE` int(2) DEFAULT NULL,
-  `CARD_HP` int(3) DEFAULT NULL,
-  `CARD_ATK_DMG` int(3) DEFAULT NULL,
+  `TODO` varchar(5) DEFAULT NULL,
   PRIMARY KEY (`CARD_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `pokemon_card`
+-- Dumping data for table `trainer_card`
 --
 
-LOCK TABLES `pokemon_card` WRITE;
-/*!40000 ALTER TABLE `pokemon_card` DISABLE KEYS */;
-/*!40000 ALTER TABLE `pokemon_card` ENABLE KEYS */;
+LOCK TABLES `trainer_card` WRITE;
+/*!40000 ALTER TABLE `trainer_card` DISABLE KEYS */;
+INSERT INTO `trainer_card` VALUES ('1',1,'Ash'),('2',2,'Brock');
+/*!40000 ALTER TABLE `trainer_card` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-28  0:23:17
+-- Dump completed on 2018-10-28  0:52:40

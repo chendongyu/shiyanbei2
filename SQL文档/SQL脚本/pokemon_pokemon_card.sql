@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.13, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: pokemon_db
+-- Host: localhost    Database: pokemon
 -- ------------------------------------------------------
 -- Server version	8.0.13
 
@@ -16,27 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `trainer_card`
+-- Table structure for table `pokemon_card`
 --
 
-DROP TABLE IF EXISTS `trainer_card`;
+DROP TABLE IF EXISTS `pokemon_card`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `trainer_card` (
+CREATE TABLE `pokemon_card` (
   `CARD_ID` varchar(5) NOT NULL,
+  `NAME` varchar(20) DEFAULT NULL,
   `TYPE` int(2) DEFAULT NULL,
-  `TODO` varchar(5) DEFAULT NULL,
+  `CARD_HP` int(3) DEFAULT NULL,
+  `CARD_ATK_DMG` int(3) DEFAULT NULL,
   PRIMARY KEY (`CARD_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `energy_card`
+-- Dumping data for table `pokemon_card`
 --
 
-LOCK TABLES `energy_card` WRITE;
-/*!40000 ALTER TABLE `energy_card` DISABLE KEYS */;
-/*!40000 ALTER TABLE `energy_card` ENABLE KEYS */;
+LOCK TABLES `pokemon_card` WRITE;
+/*!40000 ALTER TABLE `pokemon_card` DISABLE KEYS */;
+INSERT INTO `pokemon_card` VALUES ('01','Pikachu',3,3,2),('02','Bulbasaur',4,4,1),('03','Charmander',1,3,2),('04','Squirtle',6,3,1),('05','Machop',7,2,2),('06','Rattata',7,2,1),('07','Poliwag',6,2,1),('08','Bellsprout',4,1,1),('09','Geodude',5,4,1),('10','Gloom',4,2,1),('11','Mankey',7,3,2),('12','Gastly',8,1,1),('13','Slowpoke',8,2,1),('14','Voltorb',3,1,3),('15','Hitmonlee',7,2,3),('16','Horseaa',6,2,1),('17','Scyther',7,3,3),('18','Staryu',6,2,1),('19','Drowzee',8,3,1),('20','Caterpie',4,1,1);
+/*!40000 ALTER TABLE `pokemon_card` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -48,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-28  0:23:18
+-- Dump completed on 2018-10-28  0:52:42
