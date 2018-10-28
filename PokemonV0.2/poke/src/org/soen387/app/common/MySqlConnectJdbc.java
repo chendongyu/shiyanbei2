@@ -1,4 +1,4 @@
-package org.soen387.app.rdg;
+package org.soen387.app.common;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -38,7 +38,7 @@ public class MySqlConnectJdbc {
 	
 	private void loadConnectorFromProper() {
 		
-		ResourceBundle resource = ResourceBundle.getBundle("Application");
+		ResourceBundle resource = ResourceBundle.getBundle("DataBase");
 		
 		String driver = resource.getString("driver"); 
 		String dbHost = resource.getString("dbHost");

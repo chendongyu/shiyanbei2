@@ -11,15 +11,18 @@ public class UserRDG extends BaseRDG {
 
 	private String passWord;
 
+	public UserRDG(String userName,String passWord) {
+		
+		this.userName = userName;
+		this.passWord = passWord;
+	}
+	
 	public List<UserRDG> findAll() {
 		List<UserRDG> userList = new ArrayList<UserRDG>();
 		try {
-			ResultSet resultSet = excuteSql("SELECT USER.USER_NAME,USER.USER_PASSWORD FROM USER");
+			ResultSet resultSet = excuteSelSql("SELECT USER.USER_NAME,USER.USER_PASSWORD FROM USER");
 			while (resultSet.next()) {
-				UserRDG userRDG = new UserRDG();
-				userRDG.setUserName(resultSet.getString(1));
-				userRDG.setPassWord(resultSet.getString(2));
-				userList.add(userRDG);
+				userList.add(new UserRDG(resultSet.getString(1),resultSet.getString(2)));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -29,14 +32,14 @@ public class UserRDG extends BaseRDG {
 
 	}
 	
-	public UserRDG getUserByPwd(String password) {
+	public UserRDG getUserByName() {
 		
-		UserRDG userRDG = new UserRDG();
+		UserRDG userRDG = null;
 		try {
-			ResultSet resultSet = excuteSql("SELECT USER.USER_NAME,USER.USER_PASSWORD FROM USER WHERE USER.USER_PASSWORD = ?");
+			ResultSet resultSet = excuteSelSql("SELECT USER.USER_NAME,"
+					+ "USER.USER_PASSWORD FROM USER WHERE USER.USER_NAME = ?",userName);
 			if (resultSet.next()) {
-				userRDG.setUserName(resultSet.getString(1));
-				userRDG.setPassWord(resultSet.getString(2));
+				userRDG = new UserRDG(resultSet.getString(1),resultSet.getString(2));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -44,20 +47,25 @@ public class UserRDG extends BaseRDG {
 		}
 		return userRDG;
 	}
+	
+	public int insert() {
+		
+		int num = 0;
+		try {
+			num = excuteInsertSql("INSERT INTO USER(USER.USER_NAME,"
+					+ "USER.USER_PASSWORD,USER.USER_PLAYER_ID) VALUES( ?, ?, ?)",userName,passWord,0);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return num;
+	}
 
 	public String getUserName() {
 		return userName;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
 	public String getPassWord() {
 		return passWord;
-	}
-
-	public void setPassWord(String passWord) {
-		this.passWord = passWord;
 	}
 }

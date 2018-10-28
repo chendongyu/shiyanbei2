@@ -1,7 +1,8 @@
-package org.soen387.app.pc;
+package org.soen387.app.PageController;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,20 +10,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.soen387.app.rdg.PersonRDG;
-import org.soen387.app.rdg.UserRDG;
+import org.soen387.app.TransactionScript.RegisterUserTS;
+import org.soen387.app.TransactionScript.ViewUserTS;
+import org.soen387.app.viewHelper.UserHelper;
 
 /**
- * Servlet implementation class Login
+ * Servlet implementation class Register
  */
-@WebServlet("/Login")
-public class Login extends HttpServlet {
+@WebServlet("/Register")
+public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	public static Map<String, String>registeredMap = new HashMap<String, String>(); 
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Login() {
+    public RegisterServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,23 +37,20 @@ public class Login extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		PersonRDG personRDG = new PersonRDG();
-		personRDG.getAll();
-		UserRDG userRDG = new UserRDG();
-		List<UserRDG> findAll = userRDG.findAll();
+		
 		String user = request.getParameter("user");
 		String pass = request.getParameter("pass");
+		UserHelper viewHelper = new UserHelper();
 		if(user==null || user.isEmpty() || pass==null || pass.isEmpty() ) {
 			request.setAttribute("message", "Please enter both a username and a password.");
 			request.getRequestDispatcher("WEB-INF/jsp/fail.jsp").forward(request, response);
-		} else if(pass.equals(Register.registeredMap.get(user))) {
-			request.setAttribute("message", "Successfully logged in.");
-			request.getSession(true).setAttribute("login", user);
-			request.getRequestDispatcher("WEB-INF/jsp/success.jsp").forward(request, response);
-			
-		} else {
-			request.setAttribute("message", "I do not recognize that username and password combination.");
+		} else if(ViewUserTS.exceute(viewHelper, user)) {
+			request.setAttribute("message", "That user has already registered.");
 			request.getRequestDispatcher("WEB-INF/jsp/fail.jsp").forward(request, response);
+		} else {
+			RegisterUserTS.exceute(user, pass);
+			request.setAttribute("message", "That user has been successfully registered.");
+			request.getRequestDispatcher("WEB-INF/jsp/success.jsp").forward(request, response);
 		}
 		
 	}
@@ -60,7 +61,6 @@ public class Login extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-		
 	}
 
 }
