@@ -16,28 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `trainer_card`
+-- Table structure for table `inhand`
 --
 
-DROP TABLE IF EXISTS `trainer_card`;
+DROP TABLE IF EXISTS `inhand`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `trainer_card` (
-  `CARD_ID` varchar(5) NOT NULL,
-  `TYPE` int(2) DEFAULT NULL,
-  `TODO` varchar(5) DEFAULT NULL,
-  PRIMARY KEY (`CARD_ID`)
+CREATE TABLE `inhand` (
+  `INHAND_ID` int(11) NOT NULL,
+  `PLAYER` int(11) DEFAULT NULL,
+  `SPOT_1` int(11) DEFAULT NULL,
+  `SPOT_2` int(11) DEFAULT NULL,
+  `SPOT_3` int(11) DEFAULT NULL,
+  `SPOT_4` int(11) DEFAULT NULL,
+  `SPOT_5` int(11) DEFAULT NULL,
+  `SPOT_6` int(11) DEFAULT NULL,
+  `SPOT_7` int(11) DEFAULT NULL,
+  PRIMARY KEY (`INHAND_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `trainer_card`
+-- Dumping data for table `inhand`
 --
 
-LOCK TABLES `trainer_card` WRITE;
-/*!40000 ALTER TABLE `trainer_card` DISABLE KEYS */;
-INSERT INTO `trainer_card` VALUES ('1',1,'Ash'),('2',2,'Brock');
-/*!40000 ALTER TABLE `trainer_card` ENABLE KEYS */;
+LOCK TABLES `inhand` WRITE;
+/*!40000 ALTER TABLE `inhand` DISABLE KEYS */;
+/*!40000 ALTER TABLE `inhand` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -49,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-28  0:52:40
+-- Dump completed on 2018-10-29 20:32:27

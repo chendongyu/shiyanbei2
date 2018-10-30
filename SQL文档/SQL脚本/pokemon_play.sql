@@ -16,27 +16,39 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `user`
+-- Table structure for table `play`
 --
 
-DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS `play`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `user` (
-  `USER_ID` varchar(45) NOT NULL,
-  `USER_NAME` varchar(12) NOT NULL,
-  `USER_PASSWORD` varchar(16) NOT NULL,
-  PRIMARY KEY (`USER_ID`)
+CREATE TABLE `play` (
+  `PLAY_ID` int(11) NOT NULL,
+  `PLAYER_1` int(11) DEFAULT NULL,
+  `STATUS_1` int(11) DEFAULT NULL,
+  `INHAND_1` int(11) DEFAULT NULL,
+  `HANDSIZE_1` int(11) DEFAULT NULL,
+  `DECKSIZE_1` int(11) DEFAULT NULL,
+  `DISCARDSIZE_1` int(11) DEFAULT NULL,
+  `BENCH_1` int(11) DEFAULT NULL,
+  `PLAYER_2` int(11) DEFAULT NULL,
+  `STATUS_2` int(11) DEFAULT NULL,
+  `INHAND_2` int(11) DEFAULT NULL,
+  `HANDSIZE_2` int(11) DEFAULT NULL,
+  `DECKSIZE_2` int(11) DEFAULT NULL,
+  `DISCARDSIZE_2` int(11) DEFAULT NULL,
+  `BENCH_2` int(11) DEFAULT NULL,
+  PRIMARY KEY (`PLAY_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `user`
+-- Dumping data for table `play`
 --
 
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+LOCK TABLES `play` WRITE;
+/*!40000 ALTER TABLE `play` DISABLE KEYS */;
+/*!40000 ALTER TABLE `play` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

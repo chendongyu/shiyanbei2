@@ -16,30 +16,12 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `player`
+-- Dumping events for database 'pokemon'
 --
 
-DROP TABLE IF EXISTS `player`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `player` (
-  `PLAYER_KEY` int(7) NOT NULL,
-  `PLAYER_NAME` varchar(20) DEFAULT NULL,
-  `STATUS` varchar(1) DEFAULT NULL,
-  `DECK` varchar(5) DEFAULT NULL,
-  PRIMARY KEY (`PLAYER_KEY`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
 --
--- Dumping data for table `player`
+-- Dumping routines for database 'pokemon'
 --
-
-LOCK TABLES `player` WRITE;
-/*!40000 ALTER TABLE `player` DISABLE KEYS */;
-INSERT INTO `player` VALUES (1,'John','0',NULL),(2,'Tom','0',NULL);
-/*!40000 ALTER TABLE `player` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -50,4 +32,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-28  0:52:38
+-- Dump completed on 2018-10-29 20:32:28
