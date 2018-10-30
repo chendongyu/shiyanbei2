@@ -1,4 +1,4 @@
-package org.soen387.app.pc;
+package org.soen387.app.PageController;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -10,11 +10,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.soen387.app.TransactionScript.RegisterUserTS;
+import org.soen387.app.TransactionScript.ViewUserTS;
+import org.soen387.app.viewHelper.UserHelper;
+
 /**
  * Servlet implementation class Register
  */
 @WebServlet("/Register")
-public class Register extends HttpServlet {
+public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	public static Map<String, String>registeredMap = new HashMap<String, String>(); 
@@ -22,7 +26,7 @@ public class Register extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Register() {
+    public RegisterServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,14 +40,15 @@ public class Register extends HttpServlet {
 		
 		String user = request.getParameter("user");
 		String pass = request.getParameter("pass");
+		UserHelper viewHelper = new UserHelper();
 		if(user==null || user.isEmpty() || pass==null || pass.isEmpty() ) {
 			request.setAttribute("message", "Please enter both a username and a password.");
 			request.getRequestDispatcher("WEB-INF/jsp/fail.jsp").forward(request, response);
-		} else if(registeredMap.containsKey(user)) {
+		} else if(ViewUserTS.exceute(viewHelper, user)) {
 			request.setAttribute("message", "That user has already registered.");
 			request.getRequestDispatcher("WEB-INF/jsp/fail.jsp").forward(request, response);
 		} else {
-			registeredMap.put(user, pass);
+			RegisterUserTS.exceute(user, pass);
 			request.setAttribute("message", "That user has been successfully registered.");
 			request.getRequestDispatcher("WEB-INF/jsp/success.jsp").forward(request, response);
 		}
