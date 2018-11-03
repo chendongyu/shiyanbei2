@@ -13,10 +13,10 @@ import org.soen387.app.common.MySqlConnectJdbc;
 public class BaseRDG {
 
 	//Connector Class
-	public MySqlConnectJdbc connectJdbc;
+	public static MySqlConnectJdbc connectJdbc;
 	
 	//Connector
-	public Connection connect;
+	public static Connection connect;
 	
 	BaseRDG(){
 		super();
@@ -32,7 +32,7 @@ public class BaseRDG {
 	 * @return search result
 	 * @throws SQLException
 	 */
-	public ResultSet excuteSelSql(String sql,Object...params) throws SQLException{
+	public static ResultSet excuteSelSql(String sql,Object...params) throws SQLException{
 		
 		PreparedStatement pstmt;
 		pstmt = (PreparedStatement)connect.prepareStatement(sql);
@@ -57,7 +57,7 @@ public class BaseRDG {
 	 * @return insert number
 	 * @throws SQLException
 	 */
-	public int excuteInsertSql(String sql,Object...params) throws SQLException{
+	public static int excuteInsertSql(String sql,Object...params) throws SQLException{
 		
 		int num = 0;
 		PreparedStatement pstmt;
@@ -85,7 +85,7 @@ public class BaseRDG {
 	/*
 	 * TODO
 	 */
-	public <T>List<T> getDataFromResult(ResultSet resultSet,T t) throws SQLException{
+	public static <T>List<T> getDataFromResult(ResultSet resultSet,T t) throws SQLException{
 		
 /*		List<T> list = new ArrayList<T>();
 		Field[] declaredFields = t.getClass().getDeclaredFields();

@@ -5,11 +5,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.soen387.app.common.CommonUtil;
+
 public class UserRDG extends BaseRDG {
 
 	private String userName;
 
 	private String passWord;
+	
+	public UserRDG() {
+		super();
+	}
 
 	public UserRDG(String userName,String passWord) {
 		
@@ -17,7 +23,7 @@ public class UserRDG extends BaseRDG {
 		this.passWord = passWord;
 	}
 	
-	public List<UserRDG> findAll() {
+	public static List<UserRDG> findAll() {
 		List<UserRDG> userList = new ArrayList<UserRDG>();
 		try {
 			ResultSet resultSet = excuteSelSql("SELECT USER.USER_NAME,USER.USER_PASSWORD FROM USER");
@@ -32,7 +38,7 @@ public class UserRDG extends BaseRDG {
 
 	}
 	
-	public UserRDG getUserByName() {
+	public static UserRDG find(String userName) {
 		
 		UserRDG userRDG = null;
 		try {
@@ -48,12 +54,33 @@ public class UserRDG extends BaseRDG {
 		return userRDG;
 	}
 	
-	public int insert() {
+	public static UserRDG find(String userName, String passWord) {
+		
+		UserRDG userRDG = null;
+		try {
+			ResultSet resultSet = excuteSelSql("SELECT USER.USER_NAME,"
+					+ "USER.USER_PASSWORD FROM USER WHERE USER.USER_NAME = ? AND USER.USER_PASSWORD = ?",userName,passWord);
+			if (resultSet.next()) {
+				userRDG = new UserRDG(resultSet.getString(1),resultSet.getString(2));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return userRDG;
+	}
+	
+	public static int insert(UserRDG userRDG) {
+		
+		if(userRDG == null || CommonUtil.isEmpty(userRDG.getPassWord())
+				|| CommonUtil.isEmpty(userRDG.getUserName())) {
+			return 0;
+		}
 		
 		int num = 0;
 		try {
 			num = excuteInsertSql("INSERT INTO USER(USER.USER_NAME,"
-					+ "USER.USER_PASSWORD,USER.USER_PLAYER_ID) VALUES( ?, ?, ?)",userName,passWord,0);
+					+ "USER.USER_PASSWORD,USER.USER_PLAYER_ID) VALUES( ?, ?, ?)",userRDG.getUserName(),userRDG.getPassWord(),0);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -67,5 +94,13 @@ public class UserRDG extends BaseRDG {
 
 	public String getPassWord() {
 		return passWord;
+	}
+	
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public void setPassWord(String passWord) {
+		this.passWord = passWord;
 	}
 }

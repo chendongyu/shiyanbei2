@@ -6,20 +6,19 @@ import org.soen387.app.viewHelper.UserHelper;
 
 public class ViewUserTS{
 
-	private static UserRDG userRDG;
-	
 	public static boolean exceute(UserHelper viewHelper,String userName) {
-		
-		if(userRDG == null) {
-			userRDG = new UserRDG(userName,null);
+
+		if(CommonUtil.isEmpty(userName)) {
+			return false;
 		}
-		UserRDG userByName = userRDG.getUserByName();
-		
-		if(userByName == null || CommonUtil.isEmpty(userByName.getUserName())) {	
+
+		UserRDG userRDG = UserRDG.find(userName);
+
+		if(CommonUtil.isEmpty(userRDG.getPassWord())) {
 			return false;
 		}else {
-			viewHelper.setUserName(userByName.getUserName());
-			viewHelper.setPassWord(userByName.getPassWord());
+			viewHelper.setUserName(userRDG.getUserName());
+			viewHelper.setPassWord(userRDG.getPassWord());
 			return true;
 		}
 		
