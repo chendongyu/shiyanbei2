@@ -79,7 +79,7 @@ public class UserRDG extends BaseRDG {
 		int num = 0;
 		try {
 			num = excuteInsertSql("INSERT INTO USER(USER.USER_NAME,"
-					+ "USER.USER_PASSWORD,USER.USER_PLAYER_ID) VALUES( ?, ?, ?)",userRDG.getUserName(),userRDG.getPassWord(),0);
+					+ "USER.USER_PASSWORD) VALUES( ?, ?)",userRDG.getUserName(),userRDG.getPassWord());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

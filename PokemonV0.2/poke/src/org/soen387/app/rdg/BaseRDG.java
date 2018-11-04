@@ -20,8 +20,19 @@ public class BaseRDG {
 	
 	BaseRDG(){
 		super();
-		connectJdbc = MySqlConnectJdbc.getConnectMysqlJdbc();
-		this.connect = connectJdbc.getConnect();
+/*		connectJdbc = MySqlConnectJdbc.getConnectMysqlJdbc();
+		this.connect = connectJdbc.getConnect();*/
+	}
+	
+	/**
+	 * TODO
+	 */
+	private static void connectDB() {
+		
+		if(connectJdbc == null) {
+			connectJdbc = MySqlConnectJdbc.getConnectMysqlJdbc();
+			connect = connectJdbc.getConnect();			
+		}
 	}
 	
 	/**
@@ -33,6 +44,8 @@ public class BaseRDG {
 	 * @throws SQLException
 	 */
 	public static ResultSet excuteSelSql(String sql,Object...params) throws SQLException{
+		
+		connectDB();
 		//execute query
 		PreparedStatement pstmt;
 		pstmt = (PreparedStatement)connect.prepareStatement(sql);
@@ -59,6 +72,7 @@ public class BaseRDG {
 	 */
 	public static int excuteInsertSql(String sql,Object...params) throws SQLException{
 		
+		connectDB();
 		int num = 0;
 		PreparedStatement pstmt;
 		pstmt = (PreparedStatement)connect.prepareStatement(sql);

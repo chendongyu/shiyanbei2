@@ -17,7 +17,7 @@ public class ViewUserTS{
 		UserRDG userRDG = UserRDG.find(userName);
 
 		//if the user's password is null then return false
-		if(CommonUtil.isEmpty(userRDG.getPassWord())) { 
+		if(userRDG==null || CommonUtil.isEmpty(userRDG.getPassWord())) { 
 			return false;
 		}else {
 			viewHelper.setUserName(userRDG.getUserName());  //if the test is passed, then set the parameter of viewhelper to help find it 
