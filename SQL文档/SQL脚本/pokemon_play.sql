@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `play`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `play` (
-  `PLAY_ID` int(11) NOT NULL,
+  `PLAY_ID` int(11) NOT NULL AUTO_INCREMENT,
   `PLAYER_1` int(11) DEFAULT NULL,
   `STATUS_1` int(11) DEFAULT NULL,
   `INHAND_1` int(11) DEFAULT NULL,
@@ -60,4 +60,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-29 20:32:26
+-- Dump completed on 2018-11-03 23:42:36

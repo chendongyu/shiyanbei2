@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `board`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `board` (
-  `BOARD_ID` int(11) NOT NULL,
+  `BOARD_ID` int(11) NOT NULL AUTO_INCREMENT,
   `PLAYER_1` varchar(45) DEFAULT NULL,
   `DECK_1` varchar(45) DEFAULT NULL,
   `PLAYER_2` varchar(45) DEFAULT NULL,
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-29 20:32:27
+-- Dump completed on 2018-11-03 23:42:37

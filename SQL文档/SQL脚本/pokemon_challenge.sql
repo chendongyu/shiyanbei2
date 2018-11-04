@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `challenge`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `challenge` (
-  `CHALLENGE_ID` int(11) NOT NULL,
+  `CHALLENGE_ID` int(11) NOT NULL AUTO_INCREMENT,
   `CHALLENGER` varchar(45) DEFAULT NULL,
   `CHALLENGEE` varchar(45) DEFAULT NULL,
   `STATUS` int(11) DEFAULT NULL,
@@ -49,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-29 20:32:27
+-- Dump completed on 2018-11-03 23:42:37
