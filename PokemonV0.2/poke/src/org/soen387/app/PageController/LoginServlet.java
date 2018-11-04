@@ -39,21 +39,22 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		//get the user name and passwrod from the website
 		String user = request.getParameter("user");
 		String pass = request.getParameter("pass");
-	
-		viewHelper = new UserHelper();
-		ViewUserTS.exceute(viewHelper, user);
 		
+		viewHelper = new UserHelper();
+		ViewUserTS.exceute(viewHelper, user); //the user name and password will send to the database through viewhelper
+		//check if the user existing in the db
 		if(CommonUtil.isEmpty(user) || CommonUtil.isEmpty(pass)) {
 			
 			request.setAttribute("message", "Please enter both a username and a password.");
 			request.getRequestDispatcher("WEB-INF/jsp/fail.jsp").forward(request, response);
-		} else if(pass.equals(viewHelper.getPassWord())) {
-			
+		} else if(pass.equals(viewHelper.getPassWord())) {  // if the password is correct 
+			//return succeed json
 			request.setAttribute("message", "Successfully logged in.");
 			request.getSession(true).setAttribute("login", user);
-			String jsonStr ="{\"id\":\"123\",\"name\":\"–°¿Ë\"}";
+			String jsonStr ="{\"id\":\"123\",\"name\":\"–°¿Ë\"}"; // convert to json
 			PrintWriter writer = response.getWriter();
 			writer.write(jsonStr);
 			writer.close();

@@ -37,7 +37,7 @@ public class MySqlConnectJdbc {
 	}
 	
 	private void loadConnectorFromProper() {
-		
+		// get the corresponding txt file, namely "Database"
 		ResourceBundle resource = ResourceBundle.getBundle("DataBase");
 		
 		String driver = resource.getString("driver"); 
@@ -68,7 +68,9 @@ public class MySqlConnectJdbc {
 	    urlStrBuf.append(useSSL);
 
 	    try {
-	        Class.forName(driver); //classLoader,加载对应驱动
+	    	//connect db, driver address
+	        Class.forName(driver); 
+	        // connect mysql by JDBC(providing username, password) 
 	        this.connect = (Connection) DriverManager.getConnection(urlStrBuf.toString(), dbUserName, dbUserPassword);
 	    } catch (ClassNotFoundException e) {
 	        e.printStackTrace();

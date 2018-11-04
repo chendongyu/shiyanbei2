@@ -37,9 +37,8 @@ public class UserRDG extends BaseRDG {
 		return userList;
 
 	}
-	
 	public static UserRDG find(String userName) {
-		
+		//check if there is an already used user name(in case of duplicate)
 		UserRDG userRDG = null;
 		try {
 			ResultSet resultSet = excuteSelSql("SELECT USER.USER_NAME,"
@@ -58,9 +57,9 @@ public class UserRDG extends BaseRDG {
 		
 		UserRDG userRDG = null;
 		try {
-			ResultSet resultSet = excuteSelSql("SELECT USER.USER_NAME,"
+			ResultSet resultSet = excuteSelSql("SELECT USER.USER_NAME,"    //using base class method
 					+ "USER.USER_PASSWORD FROM USER WHERE USER.USER_NAME = ? AND USER.USER_PASSWORD = ?",userName,passWord);
-			if (resultSet.next()) {
+			if (resultSet.next()) {          //check if is end of file
 				userRDG = new UserRDG(resultSet.getString(1),resultSet.getString(2));
 			}
 		} catch (SQLException e) {
@@ -72,7 +71,7 @@ public class UserRDG extends BaseRDG {
 	
 	public static int insert(UserRDG userRDG) {
 		
-		if(userRDG == null || CommonUtil.isEmpty(userRDG.getPassWord())
+		if(userRDG == null || CommonUtil.isEmpty(userRDG.getPassWord())//using the method isEmpty, if it is null
 				|| CommonUtil.isEmpty(userRDG.getUserName())) {
 			return 0;
 		}

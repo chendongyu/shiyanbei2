@@ -25,22 +25,22 @@ public class BaseRDG {
 	}
 	
 	/**
-	 * Execute DB search
+	 * Search in database
 	 * 
-	 * @param the SQL
-	 * @param the params in SQL
+	 * @param the SQL (query)
+	 * @param the params in SQL (the parameter in query)
 	 * @return search result
 	 * @throws SQLException
 	 */
 	public static ResultSet excuteSelSql(String sql,Object...params) throws SQLException{
-		
+		//execute query
 		PreparedStatement pstmt;
 		pstmt = (PreparedStatement)connect.prepareStatement(sql);
 		if(params != null) {
 			for(int i=0; i<params.length; i++) {
-				if(params[i] instanceof String) {
+				if(params[i] instanceof String) {   //if is an instant of string
 					pstmt.setString(i+1, (String)params[i]);
-				}else if(params[i] instanceof Integer) {
+				}else if(params[i] instanceof Integer) { //if is an instant of integer
 					pstmt.setInt(i+1, (Integer)params[i]);
 				}
 			}
@@ -50,12 +50,12 @@ public class BaseRDG {
 	}
 
 	/**
-	 * Execute DB insert
+	 * Insert to database
 	 * 
-	 * @param the SQL
-	 * @param the params in SQL
-	 * @return insert number
-	 * @throws SQLException
+	 * @param the SQL (query)
+	 * @param the params in SQL (the parameter in query)
+	 * @return insert number (number of row)
+	 * @throws SQLException 
 	 */
 	public static int excuteInsertSql(String sql,Object...params) throws SQLException{
 		

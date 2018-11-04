@@ -12,12 +12,15 @@ public class ViewUserTS{
 			return false;
 		}
 
+		//TODO
+		//check if there's an existing userName
 		UserRDG userRDG = UserRDG.find(userName);
 
-		if(CommonUtil.isEmpty(userRDG.getPassWord())) {
+		//if the user's password is null then return false
+		if(CommonUtil.isEmpty(userRDG.getPassWord())) { 
 			return false;
 		}else {
-			viewHelper.setUserName(userRDG.getUserName());
+			viewHelper.setUserName(userRDG.getUserName());  //if the test is passed, then set the parameter of viewhelper to help find it 
 			viewHelper.setPassWord(userRDG.getPassWord());
 			return true;
 		}
