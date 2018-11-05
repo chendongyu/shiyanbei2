@@ -1,14 +1,13 @@
 package org.soen387.app.rdg;
 
-import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.soen387.app.common.MySqlConnectJdbc;
+import org.soen387.app.enums.ChallengeStatus;
 
 public class BaseRDG {
 
@@ -43,22 +42,27 @@ public class BaseRDG {
 	 * @return search result
 	 * @throws SQLException
 	 */
-	public static ResultSet excuteSelSql(String sql,Object...params) throws SQLException{
+	public static ResultSet excuteSelSql(String sql,Object...params){
 		
 		connectDB();
 		//execute query
-		PreparedStatement pstmt;
-		pstmt = (PreparedStatement)connect.prepareStatement(sql);
-		if(params != null) {
-			for(int i=0; i<params.length; i++) {
-				if(params[i] instanceof String) {   //if is an instant of string
-					pstmt.setString(i+1, (String)params[i]);
-				}else if(params[i] instanceof Integer) { //if is an instant of integer
-					pstmt.setInt(i+1, (Integer)params[i]);
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = (PreparedStatement)connect.prepareStatement(sql);
+			if(params != null) {
+				for(int i=0; i<params.length; i++) {
+					if(params[i] instanceof String) {   //if is an instant of string
+						pstmt.setString(i+1, (String)params[i]);
+					}else if(params[i] instanceof Integer) { //if is an instant of integer
+						pstmt.setInt(i+1, (Integer)params[i]);
+					}
 				}
 			}
+			rs = pstmt.executeQuery();	
+		}catch(SQLException e) {
+			e.printStackTrace();
 		}
-		ResultSet rs = pstmt.executeQuery();	
 		return rs;
 	}
 
@@ -70,30 +74,29 @@ public class BaseRDG {
 	 * @return insert number (number of row)
 	 * @throws SQLException 
 	 */
-	public static int excuteInsertSql(String sql,Object...params) throws SQLException{
+	public static int excuteInsertSql(String sql,Object...params){
 		
 		connectDB();
 		int num = 0;
 		PreparedStatement pstmt;
-		pstmt = (PreparedStatement)connect.prepareStatement(sql);
-		if(params != null) {
-			for(int i=0; i<params.length; i++) {
-				if(params[i] instanceof String) {
-					pstmt.setString(i+1, (String)params[i]);
-				}else if(params[i] instanceof Integer) {
-					pstmt.setInt(i+1, (Integer)params[i]);
-				}
-			}
-			
-			try {
-				num = pstmt.executeUpdate();
-				connect.commit();
-			}catch(Exception e) {
-				connect.rollback();
-				System.out.println("Logs out DDL EXCEPTION");
-			}
-		}
 		
+		try {
+			pstmt = (PreparedStatement) connect.prepareStatement(sql);
+			if (params != null) {
+				for (int i = 0; i < params.length; i++) {
+					if (params[i] instanceof String) {
+						pstmt.setString(i + 1, (String) params[i]);
+					} else if (params[i] instanceof Integer) {
+						pstmt.setInt(i + 1, (Integer) params[i]);
+					}
+				}
+				num = pstmt.executeUpdate();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Logs out DDL EXCEPTION");
+		}
+
 		return num;
 	}
 	/*

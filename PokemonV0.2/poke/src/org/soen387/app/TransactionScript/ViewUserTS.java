@@ -20,8 +20,8 @@ public class ViewUserTS{
 		if(userRDG==null || CommonUtil.isEmpty(userRDG.getPassWord())) { 
 			return false;
 		}else {
-			viewHelper.setUserName(userRDG.getUserName());  //if the test is passed, then set the parameter of viewhelper to help find it 
-			viewHelper.setPassWord(userRDG.getPassWord());
+			
+			CommonUtil.setPropToVH(userRDG, viewHelper);
 			return true;
 		}
 		
