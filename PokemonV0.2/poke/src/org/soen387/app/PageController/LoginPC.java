@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.omg.CORBA.SystemException;
 import org.soen387.app.TransactionScript.ViewUserTS;
+import org.soen387.app.TransactionScript.updateUserStatusTS;
 import org.soen387.app.common.CommonUtil;
+import org.soen387.app.common.Constants;
 import org.soen387.app.rdg.UserRDG;
 import org.soen387.app.viewHelper.UserHelper;
 
@@ -20,7 +22,7 @@ import org.soen387.app.viewHelper.UserHelper;
  * Servlet implementation class Login
  */
 @WebServlet("/Login")
-public class LoginServlet extends HttpServlet {
+public class LoginPC extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -29,7 +31,7 @@ public class LoginServlet extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public LoginPC() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -48,21 +50,34 @@ public class LoginServlet extends HttpServlet {
 		//check if the user existing in the db
 		if(CommonUtil.isEmpty(user) || CommonUtil.isEmpty(pass)) {
 			
-			request.setAttribute("message", "Please enter both a username and a password.");
-			request.getRequestDispatcher("WEB-INF/jsp/fail.jsp").forward(request, response);
+			String jsonStr =Constants.FAILUREJSON; // convert to json
+			PrintWriter writer = response.getWriter();
+			writer.write(jsonStr);
+			writer.close();
+			
+			//request.setAttribute("message", "Please enter both a username and a password.");
+			//request.getRequestDispatcher("WEB-INF/jsp/fail.jsp").forward(request, response);
 		} else if(pass.equals(viewHelper.getPassWord())) {  // if the password is correct 
+			
 			//return succeed json
-			request.setAttribute("message", "Successfully logged in.");
-			request.getSession(true).setAttribute("login", user);
-			String jsonStr ="{\"id\":\"123\",\"name\":\"–°¿Ë\"}"; // convert to json
+			//request.setAttribute("message", "Successfully logged in.");
+			
+			request.getSession(true).setAttribute("loginId", viewHelper.getUserId());
+			updateUserStatusTS.exceute(viewHelper.getUserId(), "1");
+			String jsonStr =Constants.SUCCESSJSON; // convert to json
 			PrintWriter writer = response.getWriter();
 			writer.write(jsonStr);
 			writer.close();
 			//request.getRequestDispatcher("WEB-INF/jsp/success.jsp").forward(request, response);
 		} else {
 			
-			request.setAttribute("message", "I do not recognize that username and password combination.");
-			request.getRequestDispatcher("WEB-INF/jsp/fail.jsp").forward(request, response);
+			String jsonStr =Constants.FAILUREJSON; // convert to json
+			PrintWriter writer = response.getWriter();
+			writer.write(jsonStr);
+			writer.close();
+			
+			//request.setAttribute("message", "I do not recognize that username and password combination.");
+			//request.getRequestDispatcher("WEB-INF/jsp/fail.jsp").forward(request, response);
 		}
 		
 	}

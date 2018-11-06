@@ -1,0 +1,114 @@
+package org.soen387.app.rdg;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ChallengeRDG extends BaseRDG {
+
+	private String id;
+	
+	private String challenger;
+	
+	private String challengee;
+	
+	private String status;
+
+	public ChallengeRDG() {
+		super();
+	}
+	
+	public ChallengeRDG(String id, String challenger, String challengee, String status) {
+		
+		this.id = id;
+		this.challenger = challenger;
+		this.challengee = challengee;
+		this.status = status;
+	}
+	
+	public static int insert(ChallengeRDG challengeRDG) {
+		
+		if(challengeRDG == null) {
+			return 0;
+		}
+		
+		int num = excuteInsertSql("INSERT INTO CHALLENGE(CHALLENGE.CHALLENGER,CHALLENGE.CHALLENGEE"
+					+ "CHALLENGE.STATUS) VALUES( ?, ?, ?)",challengeRDG.getChallenger(),challengeRDG.getChallengee(),challengeRDG.getStatus());
+		
+		return num;
+	}
+	
+	public static int update(ChallengeRDG challengeRDG) {
+		
+		if(challengeRDG == null) {
+			return 0;
+		}
+		
+		int num = excuteInsertSql("UPDATE CHALLENGE SET CHALLENGE.STATUS = ?"
+					+ " WHERE CHALLENGE.CHALLENGE_ID = ?",challengeRDG.getStatus(),challengeRDG.getId());
+		
+		return num;
+	}
+	
+	public static int delete(ChallengeRDG challengeRDG) {
+	
+		if(challengeRDG == null) {
+			return 0;
+		}
+		
+		int num = excuteInsertSql("DELETE FROM CHALLENGE WHERE "
+					+ "CHALLENGE.CHALLENGE_ID = ?",challengeRDG.getId());
+		
+		return num;
+	}
+	
+	public static List<ChallengeRDG> findAll(){
+		
+		List<ChallengeRDG> challengeRDG = new ArrayList<ChallengeRDG>();
+		try {
+			ResultSet resultSet = excuteSelSql("SELECT CHALLENGE.CHALLENGE_ID,CHALLENGE.CHALLENGER,"
+					+ " CHALLENGE.CHALLENGEE,CHALLENGE.STATUS FROM CHALLENGE");
+			
+			while (resultSet.next()) {
+				challengeRDG.add(new ChallengeRDG(resultSet.getString(1),resultSet.getString(2), resultSet.getString(3), resultSet.getString(4)));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return challengeRDG;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getChallenger() {
+		return challenger;
+	}
+
+	public void setChallenger(String challenger) {
+		this.challenger = challenger;
+	}
+
+	public String getChallengee() {
+		return challengee;
+	}
+
+	public void setChallengee(String challengee) {
+		this.challengee = challengee;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+}
