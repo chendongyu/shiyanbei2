@@ -1,7 +1,7 @@
 package org.soen387.app.enums;
 
 public enum ChallengeStatus {
-	OPEN(1),REFUSED(2),WITHDRAWN(3),ACCEPTED(4);
+	OPEN(0),REFUSED(1),WITHDRAWN(2),ACCEPTED(3);
 	
 	private int value;
 	

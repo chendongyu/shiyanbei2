@@ -13,13 +13,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.soen387.app.TransactionScript.ListPlayerTS;
 import org.soen387.app.TransactionScript.playerChallengeTS;
+import org.soen387.app.TransactionScript.updateChallengeStatusTS;
 import org.soen387.app.common.CommonUtil;
 import org.soen387.app.common.Constants;
 import org.soen387.app.viewHelper.UserHelper;
 import org.soen387.app.viewHelper.ViewHelper;
 
-@WebServlet("/ChallengePlayer")
-public class challengePlayerPC extends HttpServlet {
+@WebServlet("/RefuseChallenge")
+public class RefuseChallengePC extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -27,25 +28,28 @@ public class challengePlayerPC extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		//String player1_id = req.getParameter("challengerID");
-		String player1_id = (String)req.getSession(true).getAttribute("loginId");		
-		String player2_id = req.getParameter("challengeeID");
-		String status = "0";
-		if(player2_id == null) {
+		
+		String status = "1";
+		String challengeID = req.getParameter("challengeID");
+		
+		
+		
+		
+		
+		if(challengeID == null) {
 			String jsonStr = Constants.FAILUREJSON;
 			PrintWriter writer = resp.getWriter();
 			writer.write(jsonStr);
 			writer.close();
-		} else if(playerChallengeTS.exceute(player1_id, player2_id, status)){
+		} else if(updateChallengeStatusTS.exceute(challengeID, status)){
 			String jsonStr =Constants.FAILUREJSON; // convert to json
 			PrintWriter writer = resp.getWriter();
 			writer.write(jsonStr);
 			writer.close();
 		} else {
-			playerChallengeTS.exceute(player1_id, player2_id, status);
+			updateChallengeStatusTS.exceute(challengeID, status);
 			String jsonStr =Constants.SUCCESSJSON; // convert to json
 			PrintWriter writer = resp.getWriter();
-			//test
 			writer.write(jsonStr);
 			writer.close();
 		}
