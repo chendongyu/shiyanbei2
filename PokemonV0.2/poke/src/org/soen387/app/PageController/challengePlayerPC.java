@@ -37,13 +37,12 @@ public class challengePlayerPC extends HttpServlet {
 			writer.write(jsonStr);
 			writer.close();
 		} else if(playerChallengeTS.exceute(player1_id, player2_id, status)){
-			String jsonStr =Constants.FAILUREJSON; // convert to json
+			String jsonStr =Constants.SUCCESSJSON; // convert to json
 			PrintWriter writer = resp.getWriter();
 			writer.write(jsonStr);
 			writer.close();
 		} else {
-			playerChallengeTS.exceute(player1_id, player2_id, status);
-			String jsonStr =Constants.SUCCESSJSON; // convert to json
+			String jsonStr =Constants.FAILUREJSON; // convert to json
 			PrintWriter writer = resp.getWriter();
 			//test
 			writer.write(jsonStr);
