@@ -33,7 +33,7 @@ public class ChallengeRDG extends BaseRDG {
 			return 0;
 		}
 		
-		int num = excuteInsertSql("INSERT INTO CHALLENGE(CHALLENGE.CHALLENGER,CHALLENGE.CHALLENGEE"
+		int num = excuteInsertSql("INSERT INTO CHALLENGE(CHALLENGE.CHALLENGER,CHALLENGE.CHALLENGEE,"
 					+ "CHALLENGE.STATUS) VALUES( ?, ?, ?)",challengeRDG.getChallenger(),challengeRDG.getChallengee(),challengeRDG.getStatus());
 		
 		return num;
