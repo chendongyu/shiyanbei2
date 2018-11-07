@@ -28,7 +28,7 @@ public class BaseRDG {
 	 */
 	private static void connectDB() {
 		
-		if(connectJdbc == null) {
+		if(connectJdbc == null || connect == null) {
 			connectJdbc = MySqlConnectJdbc.getConnectMysqlJdbc();
 			connect = connectJdbc.getConnect();			
 		}

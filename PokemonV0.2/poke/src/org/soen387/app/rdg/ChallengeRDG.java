@@ -63,12 +63,12 @@ public class ChallengeRDG extends BaseRDG {
 		return num;
 	}
 	
-	public static List<ChallengeRDG> findAll(){
+	public static List<ChallengeRDG> findAllById(String userId){
 		
 		List<ChallengeRDG> challengeRDG = new ArrayList<ChallengeRDG>();
 		try {
 			ResultSet resultSet = excuteSelSql("SELECT CHALLENGE.CHALLENGE_ID,CHALLENGE.CHALLENGER,"
-					+ " CHALLENGE.CHALLENGEE,CHALLENGE.STATUS FROM CHALLENGE");
+					+ " CHALLENGE.CHALLENGEE,CHALLENGE.STATUS FROM CHALLENGE WHERE CHALLENGE.CHALLENGER = ? OR CHALLENGE.CHALLENGEE = ?",userId,userId);
 			
 			while (resultSet.next()) {
 				challengeRDG.add(new ChallengeRDG(resultSet.getString(1),resultSet.getString(2), resultSet.getString(3), resultSet.getString(4)));
