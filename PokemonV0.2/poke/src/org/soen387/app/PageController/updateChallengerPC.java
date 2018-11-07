@@ -48,7 +48,6 @@ public class updateChallengerPC extends HttpServlet {
 			playerChallengeTS.exceute(player1_id, player2_id, status);
 			String jsonStr =Constants.SUCCESSJSON; // convert to json
 			PrintWriter writer = resp.getWriter();
-			//test123123
 			writer.write(jsonStr);
 			writer.close();
 		}
