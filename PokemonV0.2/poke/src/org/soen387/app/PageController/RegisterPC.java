@@ -49,7 +49,7 @@ public class RegisterPC extends HttpServlet {
 			/*request.setAttribute("message", "Please enter both a username and a password.");
 			request.getRequestDispatcher("WEB-INF/jsp/fail.jsp").forward(request, response);*/
 			
-			String jsonStr =Constants.FAILUREJSON; // convert to json
+			String jsonStr =Constants.FAILUREJSON_RIGESTER; // convert to json
 			PrintWriter writer = response.getWriter();
 			writer.write(jsonStr);
 			writer.close();
@@ -58,7 +58,7 @@ public class RegisterPC extends HttpServlet {
 			/*request.setAttribute("message", "That user has already registered.");
 			request.getRequestDispatcher("WEB-INF/jsp/fail.jsp").forward(request, response);*/
 			
-			String jsonStr =Constants.FAILUREJSON; // convert to json
+			String jsonStr =Constants.FAILUREJSON_RIGESTER; // convert to json
 			PrintWriter writer = response.getWriter();
 			writer.write(jsonStr);
 			writer.close();
@@ -69,7 +69,7 @@ public class RegisterPC extends HttpServlet {
 			/*request.setAttribute("message", "That user has been successfully registered.");
 			request.getRequestDispatcher("WEB-INF/jsp/success.jsp").forward(request, response);*/
 			
-			String jsonStr =Constants.SUCCESSJSON; // convert to json
+			String jsonStr =Constants.SUCCESSJSON_RIGESTER; // convert to json
 			PrintWriter writer = response.getWriter();
 			writer.write(jsonStr);
 			writer.close();

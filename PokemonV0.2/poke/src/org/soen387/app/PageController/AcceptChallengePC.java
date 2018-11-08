@@ -38,18 +38,18 @@ public class AcceptChallengePC extends HttpServlet {
 		
 		
 		if(challengeID == null) {
-			String jsonStr = Constants.FAILUREJSON;
+			String jsonStr = Constants.FAILUREJSON_ACCEPTCHALLENGE;
 			PrintWriter writer = resp.getWriter();
 			writer.write(jsonStr);
 			writer.close();
 		} else if(updateChallengeStatusTS.exceute(challengeID, status)){
-			String jsonStr =Constants.FAILUREJSON; // convert to json
+			String jsonStr =Constants.FAILUREJSON_ACCEPTCHALLENGE; // convert to json
 			PrintWriter writer = resp.getWriter();
 			writer.write(jsonStr);
 			writer.close();
 		} else {
 			updateChallengeStatusTS.exceute(challengeID, status);
-			String jsonStr =Constants.SUCCESSJSON; // convert to json
+			String jsonStr =Constants.SUCCESSJSON_ACCEPTCHALLENGE; // convert to json
 			PrintWriter writer = resp.getWriter();
 			writer.write(jsonStr);
 			writer.close();

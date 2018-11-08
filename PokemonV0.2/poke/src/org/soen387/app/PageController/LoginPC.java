@@ -50,7 +50,7 @@ public class LoginPC extends HttpServlet {
 		//check if the user existing in the db
 		if(CommonUtil.isEmpty(user) || CommonUtil.isEmpty(pass)) {
 			
-			String jsonStr =Constants.FAILUREJSON; // convert to json
+			String jsonStr =Constants.FAILUREJSON_LOGIN; // convert to json
 			PrintWriter writer = response.getWriter();
 			writer.write(jsonStr);
 			writer.close();
@@ -64,14 +64,14 @@ public class LoginPC extends HttpServlet {
 			
 			request.getSession(true).setAttribute("loginId", viewHelper.getUserId());
 			updateUserStatusTS.exceute(viewHelper.getUserId(), "1");
-			String jsonStr =Constants.SUCCESSJSON; // convert to json
+			String jsonStr =Constants.SUCCESSJSON_LOGIN; // convert to json
 			PrintWriter writer = response.getWriter();
 			writer.write(jsonStr);
 			writer.close();
 			//request.getRequestDispatcher("WEB-INF/jsp/success.jsp").forward(request, response);
 		} else {
 			
-			String jsonStr =Constants.FAILUREJSON; // convert to json
+			String jsonStr =Constants.FAILUREJSON_LOGIN; // convert to json
 			PrintWriter writer = response.getWriter();
 			writer.write(jsonStr);
 			writer.close();

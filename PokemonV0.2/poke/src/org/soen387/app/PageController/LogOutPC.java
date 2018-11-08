@@ -23,7 +23,7 @@ public class LogOutPC extends HttpServlet {
 
 		if(updateUserStatusTS.exceute(loginId, "0")) {
 			
-			String jsonStr =Constants.SUCCESSJSON; // convert to json
+			String jsonStr =Constants.SUCCESSJSON_LOGOUT; // convert to json
 			PrintWriter writer = resp.getWriter();
 			writer.write(jsonStr);
 			writer.close();

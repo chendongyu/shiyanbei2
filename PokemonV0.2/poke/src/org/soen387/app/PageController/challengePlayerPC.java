@@ -32,17 +32,17 @@ public class challengePlayerPC extends HttpServlet {
 		String player2_id = req.getParameter("challengeeID");
 		String status = "0";
 		if(player2_id == null) {
-			String jsonStr = Constants.FAILUREJSON;
+			String jsonStr = Constants.FAILUREJSON_CHALLENGEPLAYER;
 			PrintWriter writer = resp.getWriter();
 			writer.write(jsonStr);
 			writer.close();
 		} else if(playerChallengeTS.exceute(player1_id, player2_id, status)){
-			String jsonStr =Constants.SUCCESSJSON; // convert to json
+			String jsonStr =Constants.SUCCESSJSON_CHALLENGEPLAYER; // convert to json
 			PrintWriter writer = resp.getWriter();
 			writer.write(jsonStr);
 			writer.close();
 		} else {
-			String jsonStr =Constants.FAILUREJSON; // convert to json
+			String jsonStr =Constants.FAILUREJSON_CHALLENGEPLAYER; // convert to json
 			PrintWriter writer = resp.getWriter();
 			//test
 			writer.write(jsonStr);
