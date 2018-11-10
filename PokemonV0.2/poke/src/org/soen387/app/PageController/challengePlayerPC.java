@@ -29,7 +29,7 @@ public class challengePlayerPC extends HttpServlet {
 
 		//String player1_id = req.getParameter("challengerID");
 		String player1_id = (String)req.getSession(true).getAttribute("loginId");		
-		String player2_id = req.getParameter("challengeeID");
+		String player2_id = req.getParameter("player");
 		String status = "0";
 		if(player2_id == null) {
 			String jsonStr = Constants.FAILUREJSON_CHALLENGEPLAYER;
@@ -54,7 +54,7 @@ public class challengePlayerPC extends HttpServlet {
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		super.doPost(req, resp);
+		doGet(req, resp);
 	}
 
 	

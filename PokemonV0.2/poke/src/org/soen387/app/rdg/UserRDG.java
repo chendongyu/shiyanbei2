@@ -38,7 +38,7 @@ public class UserRDG extends BaseRDG {
 		
 		List<UserRDG> userList = new ArrayList<UserRDG>();
 		try {
-			ResultSet resultSet = excuteSelSql("SELECT USER.USER_ID, USER.USER_NAME,USER.USER_PASSWORD FROM USER");
+			ResultSet resultSet = excuteSelSql("SELECT USER.USER_ID, USER.USER_NAME,USER.USER_PASSWORD FROM USER WHERE STATUS = 1");
 			while (resultSet.next()) {
 				userList.add(new UserRDG(resultSet.getString(1),resultSet.getString(2), resultSet.getString(3)));
 			}
