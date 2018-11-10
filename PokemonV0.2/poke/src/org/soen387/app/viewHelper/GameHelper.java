@@ -15,17 +15,17 @@ public class GameHelper implements ViewHelper {
 		
 		StringBuffer playJson = new StringBuffer();
 		
-		playJson.append("\"games\":{");
-		if(CommonUtil.isEmpty(id)) {
-			playJson.append("\"id\":\"");
+		playJson.append("{\"games\":[");
+		if(!CommonUtil.isEmpty(id)) {
+			playJson.append("{\"id\":");
 			playJson.append(id);
-			playJson.append("\",\"players\":[\"");
+			playJson.append(",\"players\":[\"");
 			playJson.append(challenger);
 			playJson.append("\",\"");
 			playJson.append(challengee);
-			playJson.append("\"]");
+			playJson.append("\"]}");
 		}
-		playJson.append("}");
+		playJson.append("]}");
 		return playJson.toString();
 	}
 	

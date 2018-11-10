@@ -25,6 +25,38 @@ public class CommonUtil {
 	}
 	
 	/**
+	 * TODO 将ViewHelper类型的容器转换为JSON中的参数
+	 * 
+	 * @param jsonName
+	 * @param list
+	 * @return
+	 */
+	public static String changeListToJsonPre(String jsonName,List<ViewHelper> list) {
+		
+		if(list == null || list.size()==0) {
+			StringBuffer jsonBuf = new StringBuffer();
+			jsonBuf.append("\"");
+			jsonBuf.append(jsonName);
+			jsonBuf.append("\":[]");
+			return jsonBuf.toString();
+		}
+		
+		StringBuffer jsonBuf = new StringBuffer();
+		jsonBuf.append("\"");
+		jsonBuf.append(jsonName);
+		jsonBuf.append("\":[");
+		
+		list.forEach((viewHelper)->{
+			jsonBuf.append(viewHelper.toJson());
+			jsonBuf.append(",");
+		});
+		
+		String substring = jsonBuf.substring(0, jsonBuf.lastIndexOf(","));
+		
+		return substring+"]";
+	}
+	
+	/**
 	 * TODO 将ViewHelper类型的容器转换为JSON
 	 * 
 	 * @param jsonName
@@ -33,8 +65,12 @@ public class CommonUtil {
 	 */
 	public static String changeListToJson(String jsonName,List<ViewHelper> list) {
 		
-		if(list == null) {
-			return null;
+		if(list == null || list.size()==0) {
+			StringBuffer jsonBuf = new StringBuffer();
+			jsonBuf.append("{\"");
+			jsonBuf.append(jsonName);
+			jsonBuf.append("\":[]}");
+			return jsonBuf.toString();
 		}
 		
 		StringBuffer jsonBuf = new StringBuffer();

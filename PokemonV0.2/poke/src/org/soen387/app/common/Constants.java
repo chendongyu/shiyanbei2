@@ -42,12 +42,7 @@ public class Constants {
 	public static final String SUCCESSJSON_LOGOUT ="{\"status\":\"success\",\"message\":"
 			+ "\"You have logged out successfully!\"}";
 	
+	public static final String CHALLENGEON = "1";
 	
-	
-	
-	
-	
-	
-	
-	
+	public static final String CHALLENGEOFF = "0";
 }

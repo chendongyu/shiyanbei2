@@ -10,8 +10,11 @@ public class ListGamesTS {
 
 		ChallengeRDG challengeAccept = ChallengeRDG.getChallengeAccept(userId);
 		
-		CommonUtil.setPropToVH(challengeAccept, viewHelper);
+		if(challengeAccept == null) {
+			return false;
+		}
 		
+		CommonUtil.setPropToVH(challengeAccept, viewHelper);
 		return true;
 	}
 }

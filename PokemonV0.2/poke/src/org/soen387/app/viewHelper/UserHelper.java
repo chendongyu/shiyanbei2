@@ -45,9 +45,9 @@ public class UserHelper implements ViewHelper{
 	public String toJson() {
 		
 		StringBuffer userJson = new StringBuffer();
-		userJson.append("{\"id\":\"");
+		userJson.append("{\"id\":");
 		userJson.append(userId);
-		userJson.append("\",\"user\":\"");
+		userJson.append(",\"user\":\"");
 		userJson.append(userName);
 		userJson.append("\"}");
 		return userJson.toString();

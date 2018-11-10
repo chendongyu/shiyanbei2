@@ -18,6 +18,7 @@ import org.soen387.app.TransactionScript.updateUserStatusTS;
 import org.soen387.app.common.CommonUtil;
 import org.soen387.app.common.Constants;
 import org.soen387.app.rdg.ChallengeRDG;
+import org.soen387.app.rdg.DeckRDG;
 import org.soen387.app.viewHelper.UserHelper;
 import org.soen387.app.viewHelper.ViewHelper;
 
@@ -36,11 +37,15 @@ public class AcceptChallengePC extends HttpServlet {
 		String userStatus = "2";
 		String challengerId = (String) req.getSession(true).getAttribute("loginId");
 		String challengeId = req.getParameter("challenge");
-		
-		
-	
-		
-		if(challengeId == null||challengerId == null) {
+		Object challengeFlag = req.getSession(true).getAttribute("challengeFlag");
+
+		List<DeckRDG> deckList = DeckRDG.findAll(challengerId);
+		if(Constants.CHALLENGEON.equals(challengeFlag) || deckList.size()==0) {
+			String jsonStr = Constants.FAILUREJSON_ACCEPTCHALLENGE;
+			PrintWriter writer = resp.getWriter();
+			writer.write(jsonStr);
+			writer.close();
+		}else if(challengeId == null||challengerId == null) {
 			String jsonStr = Constants.FAILUREJSON_ACCEPTCHALLENGE;
 			PrintWriter writer = resp.getWriter();
 			writer.write(jsonStr);

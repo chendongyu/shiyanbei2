@@ -57,7 +57,7 @@ public class DeckRDG extends BaseRDG{
 		return num;
 	}
 	
-	public static List<DeckRDG> findAll(String deckId){
+	public static List<DeckRDG> findCardNotUsed(String deckId){
 		
 		List<DeckRDG> userList = new ArrayList<DeckRDG>();
 		
@@ -77,6 +77,28 @@ public class DeckRDG extends BaseRDG{
 		}
 		
 		return userList;
+	}
+	
+	public static List<DeckRDG> findAll(String deckId){
+		
+		List<DeckRDG> deckList = new ArrayList<DeckRDG>();
+		
+		ResultSet resultSet = excuteSelSql("SELECT DK.NAME,DK.TYPE,DK.CARD_ID "
+				+ "FROM DECK DK WHERE DK.DECK_ID = ? ORDER BY DK.ORDER ",deckId);
+		
+		try {
+			while(resultSet.next()) {
+				
+				DeckRDG deckRDG = new DeckRDG(resultSet.getString(1),
+						resultSet.getString(2),resultSet.getString(3));
+				deckList.add(deckRDG);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return deckList;
 	}
 	
 	/**

@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.soen387.app.TransactionScript.RegisterUserTS;
 import org.soen387.app.TransactionScript.ViewUserTS;
 import org.soen387.app.TransactionScript.updateUserStatusTS;
-
+import org.soen387.app.common.CommonUtil;
 import org.soen387.app.common.Constants;
 import org.soen387.app.viewHelper.UserHelper;
 
@@ -46,11 +46,8 @@ public class RegisterPC extends HttpServlet {
 		String user = request.getParameter("user");
 		String pass = request.getParameter("pass");
 		UserHelper viewHelper = new UserHelper();
-		if(user==null || user.isEmpty() || pass==null || pass.isEmpty()) {
-			
-			/*request.setAttribute("message", "Please enter both a username and a password.");
-			request.getRequestDispatcher("WEB-INF/jsp/fail.jsp").forward(request, response);*/
-			
+		if(CommonUtil.isEmpty(user) || CommonUtil.isEmpty(pass)) {
+
 			String jsonStr =Constants.FAILUREJSON_RIGESTER; // convert to json
 			PrintWriter writer = response.getWriter();
 			writer.write(jsonStr);
@@ -70,10 +67,7 @@ public class RegisterPC extends HttpServlet {
 			viewHelper = new UserHelper();
 			ViewUserTS.exceute(viewHelper, user);
 			request.getSession(true).setAttribute("loginId", viewHelper.getUserId());
-			updateUserStatusTS.exceute(viewHelper.getUserId(), "1");
-			/*request.setAttribute("message", "That user has been successfully registered.");
-			request.getRequestDispatcher("WEB-INF/jsp/success.jsp").forward(request, response);*/
-			
+			updateUserStatusTS.exceute(viewHelper.getUserId(), "1");		
 			String jsonStr =Constants.SUCCESSJSON_RIGESTER; // convert to json
 			PrintWriter writer = response.getWriter();
 			writer.write(jsonStr);

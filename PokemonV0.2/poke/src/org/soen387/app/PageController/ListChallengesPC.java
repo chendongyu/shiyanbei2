@@ -28,7 +28,7 @@ public class ListChallengesPC extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-String loginId = (String)req.getSession(true).getAttribute("loginId");
+		String loginId = (String)req.getSession(true).getAttribute("loginId");
 		
 		if(CommonUtil.isEmpty(loginId)) {
 			String jsonStr =Constants.FAILUREJSON; // convert to json

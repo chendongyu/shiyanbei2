@@ -30,7 +30,7 @@ public class RefuseChallengePC extends HttpServlet {
 
 		
 		String status = "1";
-		String challengeID = req.getParameter("challengeID");
+		String challengeID = req.getParameter("challenge");
 		
 		
 		
@@ -42,13 +42,12 @@ public class RefuseChallengePC extends HttpServlet {
 			writer.write(jsonStr);
 			writer.close();
 		} else if(updateChallengeStatusTS.exceute(challengeID, status)){
-			String jsonStr =Constants.FAILUREJSON_REFUSE; // convert to json
+			String jsonStr =Constants.SUCCESSJSON_REFUSE; // convert to json
 			PrintWriter writer = resp.getWriter();
 			writer.write(jsonStr);
 			writer.close();
 		} else {
-			updateChallengeStatusTS.exceute(challengeID, status);
-			String jsonStr =Constants.SUCCESSJSON_REFUSE; // convert to json
+			String jsonStr =Constants.FAILUREJSON_REFUSE; // convert to json
 			PrintWriter writer = resp.getWriter();
 			writer.write(jsonStr);
 			writer.close();
@@ -59,7 +58,7 @@ public class RefuseChallengePC extends HttpServlet {
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		super.doPost(req, resp);
+		doGet(req, resp);
 	}
 
 	

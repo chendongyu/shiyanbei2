@@ -20,7 +20,9 @@ public class LogOutPC extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		String loginId = (String)req.getSession(true).getAttribute("loginId");
-
+		req.getSession(true).removeAttribute("loginId");
+		req.getSession(true).removeAttribute("challengeFlag");
+		
 		if(updateUserStatusTS.exceute(loginId, "0")) {
 			
 			String jsonStr =Constants.SUCCESSJSON_LOGOUT; // convert to json
@@ -34,14 +36,12 @@ public class LogOutPC extends HttpServlet {
 			writer.write(jsonStr);
 			writer.close();
 		}
-		// TODO Auto-generated method stub
-		super.doGet(req, resp);
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		// TODO Auto-generated method stub
-		super.doPost(req, resp);
+		doGet(req, resp);
 	}
 	
 	

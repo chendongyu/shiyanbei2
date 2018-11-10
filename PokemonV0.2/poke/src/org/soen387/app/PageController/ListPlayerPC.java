@@ -30,19 +30,19 @@ public class ListPlayerPC extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		viewHelper = new ArrayList<ViewHelper>();
-		ListPlayerTS.exceute(viewHelper);
-		String playersJson = CommonUtil.changeListToJson("players", viewHelper);
-		
-		if(playersJson == null) {
+		if(ListPlayerTS.exceute(viewHelper)) {
+			
+			String playersJson = CommonUtil.changeListToJson("players", viewHelper);
+			PrintWriter writer = resp.getWriter();
+			writer.write(playersJson);
+			writer.close();
+		}else {
+			
 			String jsonStr = Constants.FAILUREJSON;
 			PrintWriter writer = resp.getWriter();
 			writer.write(jsonStr);
 			writer.close();
 		}
-		
-		PrintWriter writer = resp.getWriter();
-		writer.write(playersJson);
-		writer.close();
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

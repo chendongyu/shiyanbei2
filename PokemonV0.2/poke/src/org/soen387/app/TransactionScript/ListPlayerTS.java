@@ -16,12 +16,17 @@ public class ListPlayerTS {
 
 		List<UserRDG> allUser = UserRDG.findAllLogin();
 		
-		for(int index=0; index<allUser.size();index++) {
-			UserHelper userHelper = new UserHelper();
-			CommonUtil.setPropToVH(allUser.get(index), userHelper);
-			viewHelper.add(userHelper);
+		if(allUser.size()>0) {
+			
+			for(int index=0; index<allUser.size();index++) {
+				UserHelper userHelper = new UserHelper();
+				CommonUtil.setPropToVH(allUser.get(index), userHelper);
+				viewHelper.add(userHelper);
+			}
+			return true;
+		}else {
+			
+			return false;
 		}
-
-		return true;
 	}
 }
