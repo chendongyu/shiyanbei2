@@ -44,7 +44,7 @@ public class PlayRDG extends BaseRDG {
 		try {
 			ResultSet resultSet = excuteSelSql("SELECT USER.STATUS, SUM(INHAND.CARD_ID) AS HANDSIZE, SUM(DECK1.CARD_ID) AS DECKSIZE, SUM(DECK2.CARD_ID) AS DISCARDSIZE FROM USER INNER JOIN INHAND ON USER.USER_ID = INHAND.USER_ID INNER JOIN DECK DECK1 ON DECK1.DECK_ID = USER.USER_ID AND DECK1.STATUS = 0 INNER JOIN DECK DECK2 ON DECK2.DECK_ID = USER.USER_ID AND DECK2.STATUS = 2 WHERE USER.USER_ID = ?\r\n", 
 					userId);
-			if (resultSet.next()) {
+			while (resultSet.next()) {
 				PlayRDG = new PlayRDG(resultSet.getString(1),userId,resultSet.getString(2),resultSet.getString(3),resultSet.getString(4));
 			} 
 		} catch (SQLException e) {
