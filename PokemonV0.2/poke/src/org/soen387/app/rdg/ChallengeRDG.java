@@ -19,6 +19,14 @@ public class ChallengeRDG extends BaseRDG {
 		super();
 	}
 	
+	public ChallengeRDG(String id, String challenger, String challengee) {
+		
+		this.id = id;
+		this.challenger = challenger;
+		this.challengee = challengee;
+
+	}
+	
 	public ChallengeRDG(String id, String challenger, String challengee, String status) {
 		
 		this.id = id;
@@ -61,6 +69,25 @@ public class ChallengeRDG extends BaseRDG {
 					+ "CHALLENGE.CHALLENGE_ID = ?",challengeRDG.getId());
 		
 		return num;
+	}
+	
+	public static ChallengeRDG findPlayers(String id) {
+		
+		ChallengeRDG challengeRDG = null;
+		
+		try {
+			ResultSet resultSet = excuteSelSql("SELECT CHALLENGE.CHALLENGER, CHALLENGE.CHALLENGEE FROM CHALLENGE WHERE CHALLENGE.CHALLENGE_ID = ?\r\n", 
+					id);
+			if (resultSet.next()) {
+				challengeRDG = new ChallengeRDG(id,resultSet.getString(1),resultSet.getString(2));
+			} 
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();	
+			}
+		
+		
+		return challengeRDG;
 	}
 	
 	public static List<ChallengeRDG> findAllById(String userId){

@@ -14,8 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.soen387.app.TransactionScript.ListPlayerTS;
 import org.soen387.app.TransactionScript.playerChallengeTS;
 import org.soen387.app.TransactionScript.updateChallengeStatusTS;
+import org.soen387.app.TransactionScript.updateUserStatusTS;
 import org.soen387.app.common.CommonUtil;
 import org.soen387.app.common.Constants;
+import org.soen387.app.rdg.ChallengeRDG;
 import org.soen387.app.viewHelper.UserHelper;
 import org.soen387.app.viewHelper.ViewHelper;
 
@@ -25,31 +27,38 @@ public class AcceptChallengePC extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	
-	
+		
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		
 		String status = "3";
-		String challengeID = req.getParameter("challengeID");
+		String userStatus = "2";
+		String challengerId = (String) req.getSession(true).getAttribute("loginId");
+		String challengeId = req.getParameter("challenge");
 		
 		
+	
 		
-		
-		
-		if(challengeID == null) {
+		if(challengeId == null||challengerId == null) {
 			String jsonStr = Constants.FAILUREJSON_ACCEPTCHALLENGE;
 			PrintWriter writer = resp.getWriter();
 			writer.write(jsonStr);
 			writer.close();
-		} else if(updateChallengeStatusTS.exceute(challengeID, status)){
-			String jsonStr =Constants.FAILUREJSON_ACCEPTCHALLENGE; // convert to json
+		} else if(updateChallengeStatusTS.exceute(challengeId, status)){
+			
+			String jsonStr =Constants.SUCCESSJSON_ACCEPTCHALLENGE; // convert to json
+			updateUserStatusTS.exceute(	
+					ChallengeRDG.findPlayers(challengeId).getChallenger(), userStatus);
+			updateUserStatusTS.exceute(	
+					ChallengeRDG.findPlayers(challengeId).getChallengee(), userStatus);
+			
 			PrintWriter writer = resp.getWriter();
 			writer.write(jsonStr);
 			writer.close();
 		} else {
-			updateChallengeStatusTS.exceute(challengeID, status);
-			String jsonStr =Constants.SUCCESSJSON_ACCEPTCHALLENGE; // convert to json
+			
+			String jsonStr =Constants.FAILUREJSON_ACCEPTCHALLENGE; // convert to json
 			PrintWriter writer = resp.getWriter();
 			writer.write(jsonStr);
 			writer.close();
@@ -60,7 +69,7 @@ public class AcceptChallengePC extends HttpServlet {
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		super.doPost(req, resp);
+		doGet(req, resp);
 	}
 
 	
