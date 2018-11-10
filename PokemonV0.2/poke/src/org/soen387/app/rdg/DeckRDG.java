@@ -39,7 +39,7 @@ public class DeckRDG extends BaseRDG{
 			return 0;
 		}
 		
-		int num = excuteInsertSql("UPDATE deck SET DECK_ID = '' WHERE DECK_ID = ?",deckId);
+		int num = excuteInsertSql("DELETE FROM DECK WHERE DECK_ID = ?",deckId);
 		
 		return num;
 	}
