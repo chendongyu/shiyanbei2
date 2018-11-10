@@ -19,6 +19,14 @@ public class ChallengeRDG extends BaseRDG {
 		super();
 	}
 	
+	public ChallengeRDG(String id, String challenger, String challengee) {
+		
+		this.id = id;
+		this.challenger = challenger;
+		this.challengee = challengee;
+
+	}
+	
 	public ChallengeRDG(String id, String challenger, String challengee, String status) {
 		
 		this.id = id;
@@ -63,6 +71,25 @@ public class ChallengeRDG extends BaseRDG {
 		return num;
 	}
 	
+	public static ChallengeRDG findPlayers(String id) {
+		
+		ChallengeRDG challengeRDG = null;
+		
+		try {
+			ResultSet resultSet = excuteSelSql("SELECT CHALLENGE.CHALLENGER, CHALLENGE.CHALLENGEE FROM CHALLENGE WHERE CHALLENGE.CHALLENGE_ID = ?\r\n", 
+					id);
+			if (resultSet.next()) {
+				challengeRDG = new ChallengeRDG(id,resultSet.getString(1),resultSet.getString(2));
+			} 
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();	
+			}
+		
+		
+		return challengeRDG;
+	}
+	
 	public static List<ChallengeRDG> findAllById(String userId){
 		
 		List<ChallengeRDG> challengeRDG = new ArrayList<ChallengeRDG>();
@@ -77,6 +104,24 @@ public class ChallengeRDG extends BaseRDG {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return challengeRDG;
+	}
+	
+	public static ChallengeRDG getChallengeAccept(String userId) {
+		
+		ChallengeRDG challengeRDG = null;
+		
+		ResultSet resultSet = excuteSelSql("SELECT CHALLENGE.CHALLENGE_ID,CHALLENGE.CHALLENGER, CHALLENGE.CHALLENGEE,CHALLENGE.STATUS FROM CHALLENGE "
+				+ "WHERE (CHALLENGE.CHALLENGER = ? OR CHALLENGE.CHALLENGEE = ?) AND CHALLENGE.STATUS = 3 ORDER BY CHALLENGE_ID DESC limit 1",userId,userId);
+	
+		try {
+			if(resultSet.next()) {
+				challengeRDG = new ChallengeRDG(resultSet.getString(1),resultSet.getString(2), resultSet.getString(3), resultSet.getString(4));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 		return challengeRDG;
 	}
 
