@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.soen387.app.TransactionScript.RegisterUserTS;
 import org.soen387.app.TransactionScript.ViewUserTS;
+import org.soen387.app.TransactionScript.updateUserStatusTS;
+
 import org.soen387.app.common.Constants;
 import org.soen387.app.viewHelper.UserHelper;
 
@@ -65,7 +67,10 @@ public class RegisterPC extends HttpServlet {
 		} else {
 			
 			RegisterUserTS.exceute(user, pass);
-			 
+			viewHelper = new UserHelper();
+			ViewUserTS.exceute(viewHelper, user);
+			request.getSession(true).setAttribute("loginId", viewHelper.getUserId());
+			updateUserStatusTS.exceute(viewHelper.getUserId(), "1");
 			/*request.setAttribute("message", "That user has been successfully registered.");
 			request.getRequestDispatcher("WEB-INF/jsp/success.jsp").forward(request, response);*/
 			

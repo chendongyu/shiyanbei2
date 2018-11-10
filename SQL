@@ -1,3 +1,1 @@
-SELECT * FROM challenge;
-
-alter table challenge MODIFY COLUMN CHALLENGE_ID INT auto_increment
+SELECT * FROM user

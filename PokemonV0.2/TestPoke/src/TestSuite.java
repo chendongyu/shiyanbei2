@@ -488,7 +488,7 @@ class TestSuite {
 			assertTrue(false);
 		}
 	}
-	
+	//他注册完事儿直接登出 说明注册完了会直接跳转进登入
 	@Test
 	void testLogoutSuccess() {
 		try {
@@ -540,7 +540,8 @@ class TestSuite {
 			assertTrue(false);
 		}
 	}
-	
+	//已经写进去了 应该怎么测？
+	//直接用读json瞎搞吧
 	@Test
 	void testListPlayersFailure() {
 		try {
@@ -1637,7 +1638,8 @@ class TestSuite {
 	 *  TestNotLoggedIn
 	 *  
 	 */
-
+	
+	
 	@Test
 	void testUploadDeckFailNoLogin() {
 		try {

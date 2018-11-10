@@ -20,7 +20,7 @@ import org.soen387.app.viewHelper.UserHelper;
 import org.soen387.app.viewHelper.ViewHelper;
 
 
-@WebServlet("/RetireFromGame")
+@WebServlet("/Retire")
 public class RetireFromGamePC extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;

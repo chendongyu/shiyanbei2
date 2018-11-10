@@ -8,6 +8,8 @@ import org.soen387.app.rdg.UserRDG;
 import org.soen387.app.viewHelper.UserHelper;
 import org.soen387.app.viewHelper.ViewHelper;
 
+
+
 public class ListPlayerTS {
 
 	public static boolean exceute(List<ViewHelper> viewHelper) {
