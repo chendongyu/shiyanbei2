@@ -3,4 +3,4 @@ TRUNCATE TABLE deck;
 SELECT * from user;
 TRUNCATE TABLE user;
 SELECT * from challenge;
-TRUNCATE TABLE challenge
+TRUNCATE TABLE challenge;

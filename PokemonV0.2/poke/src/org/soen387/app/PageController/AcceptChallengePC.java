@@ -58,6 +58,8 @@ public class AcceptChallengePC extends HttpServlet {
 			updateUserStatusTS.exceute(	
 					ChallengeRDG.findPlayers(challengeId).getChallengee(), userStatus);
 			
+			req.getSession(true).setAttribute("gameId", challengeId);
+			
 			PrintWriter writer = resp.getWriter();
 			writer.write(jsonStr);
 			writer.close();

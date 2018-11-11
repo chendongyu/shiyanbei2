@@ -33,6 +33,9 @@ public class DeckRDG extends BaseRDG{
 		
 	}
 	
+
+		
+	
 	public static int delete(String deckId) {
 		
 		if(CommonUtil.isEmpty(deckId)) {
@@ -107,15 +110,15 @@ public class DeckRDG extends BaseRDG{
 	 * @param rolNum
 	 * @return
 	 */
-	public static List<DeckRDG> getByRolNum(String deckId,int rolNum){
+	public static List<DeckRDG> getByRolNum(String deckId){
 		
 		 List<DeckRDG> userList = new ArrayList<DeckRDG>();
 		
 		ResultSet resultSet = excuteSelSql("SELECT DK.NAME,DK.TYPE,DK.CARD_ID FROM DECK DK "
-				+ "WHERE DK.DECK_ID = ? AND DK.STATUS <> 1 ORDER BY DK.ORDER limit 0,?",deckId,rolNum);
+				+ "WHERE DK.DECK_ID = ? AND DK.STATUS <> 1 ORDER BY DK.ORDER limit 1;",deckId);
 		
 		try {
-			while(resultSet.next()) {
+			if(resultSet.next()) {
 				
 				DeckRDG deckRDG = new DeckRDG(resultSet.getString(1),
 						resultSet.getString(2),resultSet.getString(3));
@@ -132,6 +135,31 @@ public class DeckRDG extends BaseRDG{
 		
 		return userList;
 	}
+	
+	//抓卡
+	public static DeckRDG updateCardStatus(String deckId) {
+		DeckRDG deckRDG = null;
+			
+		ResultSet resultSet = excuteSelSql("SELECT DK.NAME,DK.TYPE,DK.CARD_ID FROM DECK DK "
+				+ "WHERE DK.DECK_ID = ? AND DK.STATUS <> 1 ORDER BY DK.ORDER limit 1;",deckId);
+			
+			
+			try {
+				if(resultSet.next()) {
+					
+					deckRDG = new DeckRDG(resultSet.getString(1),
+					resultSet.getString(2),resultSet.getString(3));						
+					excuteInsertSql("UPDATE DECK SET STATUS = 1 WHERE CARD_ID = ?;",resultSet.getString(3));
+				}						
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	
+			
+			return deckRDG;
+	}
+
 
 	public String getDeckId() {
 		return deckId;
