@@ -19,8 +19,8 @@ public class PlayRDG extends BaseRDG {
 	
 	private String status;
 	
-	
-	
+	private List<BenchRDG> benchRDG;
+
 	public PlayRDG() {
 		super();
 	}
@@ -40,12 +40,50 @@ public class PlayRDG extends BaseRDG {
 	public static PlayRDG findAll(String userId)
 	{
 		PlayRDG PlayRDG = null;
+		String pHandSize = "0";
+		String pDeckSize = "0";
+		String pDiscardSize = "0";
+		String pStatus = null;
 		
 		try {
-			ResultSet resultSet = excuteSelSql("SELECT USER.STATUS, SUM(INHAND.CARD_ID) AS HANDSIZE, SUM(DECK1.CARD_ID) AS DECKSIZE, SUM(DECK2.CARD_ID) AS DISCARDSIZE FROM USER INNER JOIN INHAND ON USER.USER_ID = INHAND.USER_ID INNER JOIN DECK DECK1 ON DECK1.DECK_ID = USER.USER_ID AND DECK1.STATUS = 0 INNER JOIN DECK DECK2 ON DECK2.DECK_ID = USER.USER_ID AND DECK2.STATUS = 2 WHERE USER.USER_ID = ?\r\n", 
+			ResultSet resultSet = excuteSelSql("SELECT USER.STATUS, "
+					+ "DECK.STATUS, "
+					+ "COUNT(DECK.CARD_ID) AS HANDSIZE "
+					+ "FROM  USER "
+					+ "INNER JOIN DECK "
+					+ "ON USER.USER_ID = DECK.DECK_ID "
+					+ "WHERE USER.USER_ID = ? "
+					+ "GROUP BY DECK.STATUS", 
 					userId);
+
 			while (resultSet.next()) {
-				PlayRDG = new PlayRDG(resultSet.getString(1),userId,resultSet.getString(2),resultSet.getString(3),resultSet.getString(4));
+				if("0".equals(resultSet.getString(2))) {
+					pStatus = resultSet.getString(1);
+					pDeckSize = resultSet.getString(3);
+				}
+				
+				if("1".equals(resultSet.getString(2))) {
+					pStatus = resultSet.getString(1);
+					pHandSize = resultSet.getString(3);
+				}
+				
+				if("2".equals(resultSet.getString(2))) {
+					pStatus = resultSet.getString(1);
+					pDiscardSize = resultSet.getString(3);
+				}
+				
+				if(!CommonUtil.isEmpty(pStatus)) {
+					PlayRDG = new PlayRDG(pStatus,userId,pHandSize,pDeckSize,pDiscardSize);
+					BenchRDG BenchRDG = new BenchRDG();
+					BenchRDG.setCardId("1");
+					List benchRDGs = new ArrayList<BenchRDG>();
+					benchRDGs.add(BenchRDG);
+					BenchRDG BenchRDG2 = new BenchRDG();
+					BenchRDG2.setCardId("2");
+					benchRDGs.add(BenchRDG);
+					PlayRDG.setBenchRDG(benchRDGs);
+				}
+				
 			} 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -117,8 +155,11 @@ public class PlayRDG extends BaseRDG {
 		this.status = status;
 	}
 	
-	
-	
+	public List<BenchRDG> getBenchRDG() {
+		return benchRDG;
+	}
 
-
+	public void setBenchRDG(List<BenchRDG> benchRDG) {
+		this.benchRDG = benchRDG;
+	}
 }

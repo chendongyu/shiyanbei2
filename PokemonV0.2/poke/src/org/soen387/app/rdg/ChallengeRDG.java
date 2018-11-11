@@ -124,6 +124,24 @@ public class ChallengeRDG extends BaseRDG {
 		
 		return challengeRDG;
 	}
+	
+public static ChallengeRDG getChallengeByGameId(String gameId) {
+		
+		ChallengeRDG challengeRDG = null;
+		
+		ResultSet resultSet = excuteSelSql("SELECT CHALLENGE.CHALLENGE_ID,CHALLENGE.CHALLENGER, CHALLENGE.CHALLENGEE,CHALLENGE.STATUS FROM CHALLENGE "
+				+ "WHERE CHALLENGE.CHALLENGE_ID = ?",gameId);
+	
+		try {
+			if(resultSet.next()) {
+				challengeRDG = new ChallengeRDG(resultSet.getString(1),resultSet.getString(2), resultSet.getString(3), resultSet.getString(4));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return challengeRDG;
+	}
 
 	public String getId() {
 		return id;
