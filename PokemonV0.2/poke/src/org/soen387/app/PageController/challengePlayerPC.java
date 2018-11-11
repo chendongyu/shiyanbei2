@@ -30,7 +30,8 @@ public class challengePlayerPC extends HttpServlet {
 		
 		UserRDG userRDG = UserRDG.findById(player2_id);
 		
-		if(userRDG == null ||CommonUtil.isEmpty(player1_id)|| CommonUtil.isEmpty(player2_id) || player1_id.equals(player2_id)) {
+		if(userRDG == null ||CommonUtil.isEmpty(player1_id)|| CommonUtil.isEmpty(player2_id) || player1_id.equals(player2_id)
+				||Integer.parseInt(player1_id) < 0||Integer.parseInt(player2_id) < 0) {
 			String jsonStr = Constants.FAILUREJSON_CHALLENGEPLAYER;
 			PrintWriter writer = resp.getWriter();
 			writer.write(jsonStr);

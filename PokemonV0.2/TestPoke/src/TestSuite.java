@@ -617,9 +617,9 @@ public class TestSuite {
 			dc = JsonPath.parse(jsonText);
 			Assert.assertEquals("success", dc.read("$['status']"));
 			
-			jsonText = challengePlayer(webClient,Integer.parseInt(String.valueOf((jPathResult.get(0)))));
+			//jsonText = challengePlayer(webClient,Integer.parseInt(String.valueOf((jPathResult.get(0)))));
 			//ÀÏÊ¦Ð´µÄ
-			//jsonText = challengePlayer(webClient, (Integer)((Object)(jPathResult.get(0))));
+			jsonText = challengePlayer(webClient, (Integer)((Object)(jPathResult.get(0))));
 			dc = JsonPath.parse(jsonText);
 			Assert.assertEquals("success", dc.read("$['status']"));
 			

@@ -59,14 +59,14 @@ public class ChallengeRDG extends BaseRDG {
 		return num;
 	}
 	
-	public static int delete(ChallengeRDG challengeRDG) {
+	public static int delete(String id) {
 	
-		if(challengeRDG == null) {
+		if(id == null) {
 			return 0;
 		}
 		
 		int num = excuteInsertSql("DELETE FROM CHALLENGE WHERE "
-					+ "CHALLENGE.CHALLENGE_ID = ?",challengeRDG.getId());
+					+ "CHALLENGE.CHALLENGE_ID = ?",id);
 		
 		return num;
 	}

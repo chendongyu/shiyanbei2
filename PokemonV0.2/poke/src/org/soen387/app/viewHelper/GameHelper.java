@@ -10,6 +10,9 @@ public class GameHelper implements ViewHelper {
 	
 	private String challengee;
 	
+	
+	
+
 	@Override
 	public String toJson() {
 		
@@ -52,4 +55,7 @@ public class GameHelper implements ViewHelper {
 	public void setChallengee(String challengee) {
 		this.challengee = challengee;
 	}
+	
+	
+
 }
