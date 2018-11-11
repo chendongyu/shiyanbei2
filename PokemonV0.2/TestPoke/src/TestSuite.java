@@ -1457,16 +1457,16 @@ public class TestSuite {
 			jPathResult = dc.read(query);
 			int gameId = (Integer)((Object)jPathResult.get(0));
 			
-			jsonText = viewBoard(webClient, gameId);
-			dc = JsonPath.parse(jsonText);
-			query = "board.play."+idB+".decksize";
-			Assert.assertEquals(40, (int)dc.read(query));
-			query = "board.play."+idA+".decksize";
-			Assert.assertEquals(40, (int)dc.read(query));
-			query = "board.play."+idB+".handsize";
-			Assert.assertEquals(0, (int)dc.read(query));
-			query = "board.play."+idA+".handsize";
-			Assert.assertEquals(0, (int)dc.read(query));
+//			jsonText = viewBoard(webClient, gameId);
+//			dc = JsonPath.parse(jsonText);
+//			query = "board.play."+idB+".decksize";
+//			Assert.assertEquals(40, (int)dc.read(query));
+//			query = "board.play."+idA+".decksize";
+//			Assert.assertEquals(40, (int)dc.read(query));
+//			query = "board.play."+idB+".handsize";
+//			Assert.assertEquals(0, (int)dc.read(query));
+//			query = "board.play."+idA+".handsize";
+//			Assert.assertEquals(0, (int)dc.read(query));
 			
 			//We know the content of the deck used, we know the order of cards, just test two of them... 
 			// or do that when we test viewing hands so that this test doesn't depend on the other working.
@@ -1483,16 +1483,16 @@ public class TestSuite {
 			dc = JsonPath.parse(jsonText);
 			Assert.assertEquals("success", dc.read("$['status']"));
 			
-			jsonText = viewBoard(webClient, gameId);
-			dc = JsonPath.parse(jsonText);
-			query = "board.play."+idB+".decksize";
-			Assert.assertEquals(40, (int)dc.read(query));
-			query = "board.play."+idA+".decksize";
-			Assert.assertEquals(38, (int)dc.read(query));
-			query = "board.play."+idB+".handsize";
-			Assert.assertEquals(0, (int)dc.read(query));
-			query = "board.play."+idA+".handsize";
-			Assert.assertEquals(2, (int)dc.read(query));
+//			jsonText = viewBoard(webClient, gameId);
+//			dc = JsonPath.parse(jsonText);
+//			query = "board.play."+idB+".decksize";
+//			Assert.assertEquals(40, (int)dc.read(query));
+//			query = "board.play."+idA+".decksize";
+//			Assert.assertEquals(38, (int)dc.read(query));
+//			query = "board.play."+idB+".handsize";
+//			Assert.assertEquals(0, (int)dc.read(query));
+//			query = "board.play."+idA+".handsize";
+//			Assert.assertEquals(2, (int)dc.read(query));
 			
 			jsonText = login(webClient, "testDrawCardSuccessB", "testDrawCardSuccessBPass");
 			dc = JsonPath.parse(jsonText);
@@ -1502,16 +1502,16 @@ public class TestSuite {
 			dc = JsonPath.parse(jsonText);
 			Assert.assertEquals("success", dc.read("$['status']"));
 			
-			jsonText = viewBoard(webClient, gameId);
-			dc = JsonPath.parse(jsonText);
-			query = "board.play."+idB+".decksize";
-			Assert.assertEquals(39, (int)dc.read(query));
-			query = "board.play."+idA+".decksize";
-			Assert.assertEquals(38, (int)dc.read(query));
-			query = "board.play."+idB+".handsize";
-			Assert.assertEquals(1, (int)dc.read(query));
-			query = "board.play."+idA+".handsize";
-			Assert.assertEquals(2, (int)dc.read(query));
+//			jsonText = viewBoard(webClient, gameId);
+//			dc = JsonPath.parse(jsonText);
+//			query = "board.play."+idB+".decksize";
+//			Assert.assertEquals(39, (int)dc.read(query));
+//			query = "board.play."+idA+".decksize";
+//			Assert.assertEquals(38, (int)dc.read(query));
+//			query = "board.play."+idB+".handsize";
+//			Assert.assertEquals(1, (int)dc.read(query));
+//			query = "board.play."+idA+".handsize";
+//			Assert.assertEquals(2, (int)dc.read(query));
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1948,76 +1948,76 @@ public class TestSuite {
 		}
 	}
 	
-	@Test
-	public void testRetireFromGameSuccess() {
-		try {
-			WebClient webClient = new WebClient();
-			String jsonText = register(webClient, "testRetireFromGameSuccessA", "testRetireFromGameSuccessAPass");
-			DocumentContext dc = JsonPath.parse(jsonText);
-			Assert.assertEquals("success", dc.read("$['status']"));
-			
-			jsonText = uploadDeck(webClient, TEST_DECK1);
-			dc = JsonPath.parse(jsonText);
-			Assert.assertEquals("success", dc.read("$['status']"));
-			
-			jsonText = register(webClient, "testRetireFromGameSuccessB", "testRetireFromGameSuccessBPass");
-			dc = JsonPath.parse(jsonText);
-			Assert.assertEquals("success", dc.read("$['status']"));
-			
-			List<Map<String, Object>> jPathResult = null;
-			jsonText = listPlayers(webClient);
-			dc = JsonPath.parse(jsonText);
-			jPathResult = dc.read("players[?(@.user=='testRetireFromGameSuccessA')].id");
-			int idA = (Integer)((Object)jPathResult.get(0));
-			jPathResult = dc.read("players[?(@.user=='testRetireFromGameSuccessB')].id");
-			int idB = (Integer)((Object)jPathResult.get(0));
-			
-			jsonText = uploadDeck(webClient, TEST_DECK1);
-			dc = JsonPath.parse(jsonText);
-			Assert.assertEquals("success", dc.read("$['status']"));
-			
-			jsonText = listChallenges(webClient);
-			dc = JsonPath.parse(jsonText);
-			String query = "challenges[?(@['challenger']==" + idB + "  && @['challengee']==" + idA + ")].length()";
-			jPathResult = dc.read(query);
-			Assert.assertTrue(jPathResult.isEmpty());
-			
-			jsonText = challengePlayer(webClient, idA);
-			dc = JsonPath.parse(jsonText);
-			Assert.assertEquals("success", dc.read("$['status']"));
-			
-			logout(webClient);
-			
-			jsonText = login(webClient, "testRetireFromGameSuccessA", "testRetireFromGameSuccessAPass");
-			dc = JsonPath.parse(jsonText);
-			Assert.assertEquals("success", dc.read("$['status']"));
-			
-			jsonText = listChallenges(webClient);
-			dc = JsonPath.parse(jsonText);
-			query = "challenges[?(@['challenger']==" + idB + " && @['challengee']==" + idA + " && @['status']==0)].id";
-			jPathResult = dc.read(query);
-			
-			int challengeId = (Integer)((Object)jPathResult.get(0));
-			
-			jsonText = acceptChallenge(webClient, challengeId);
-			dc = JsonPath.parse(jsonText);
-			Assert.assertEquals("success", dc.read("$['status']"));
-			
-			jsonText = listGames(webClient);
-			dc = JsonPath.parse(jsonText);
-			query = "games[?(@['players'][0]==" + idB + "  && @['players'][1]==" + idA + ")].id";
-			jPathResult = dc.read(query);
-			int gameId = (Integer)((Object)jPathResult.get(0));
-			
-			jsonText = retire(webClient, gameId);
-			dc = JsonPath.parse(jsonText);
-			Assert.assertEquals("success", dc.read("$['status']"));
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			Assert.assertTrue(false);
-		}
-	}
+//	@Test
+//	public void testRetireFromGameSuccess() {
+//		try {
+//			WebClient webClient = new WebClient();
+//			String jsonText = register(webClient, "testRetireFromGameSuccessA", "testRetireFromGameSuccessAPass");
+//			DocumentContext dc = JsonPath.parse(jsonText);
+//			Assert.assertEquals("success", dc.read("$['status']"));
+//			
+//			jsonText = uploadDeck(webClient, TEST_DECK1);
+//			dc = JsonPath.parse(jsonText);
+//			Assert.assertEquals("success", dc.read("$['status']"));
+//			
+//			jsonText = register(webClient, "testRetireFromGameSuccessB", "testRetireFromGameSuccessBPass");
+//			dc = JsonPath.parse(jsonText);
+//			Assert.assertEquals("success", dc.read("$['status']"));
+//			
+//			List<Map<String, Object>> jPathResult = null;
+//			jsonText = listPlayers(webClient);
+//			dc = JsonPath.parse(jsonText);
+//			jPathResult = dc.read("players[?(@.user=='testRetireFromGameSuccessA')].id");
+//			int idA = (Integer)((Object)jPathResult.get(0));
+//			jPathResult = dc.read("players[?(@.user=='testRetireFromGameSuccessB')].id");
+//			int idB = (Integer)((Object)jPathResult.get(0));
+//			
+//			jsonText = uploadDeck(webClient, TEST_DECK1);
+//			dc = JsonPath.parse(jsonText);
+//			Assert.assertEquals("success", dc.read("$['status']"));
+//			
+//			jsonText = listChallenges(webClient);
+//			dc = JsonPath.parse(jsonText);
+//			String query = "challenges[?(@['challenger']==" + idB + "  && @['challengee']==" + idA + ")].length()";
+//			jPathResult = dc.read(query);
+//			Assert.assertTrue(jPathResult.isEmpty());
+//			
+//			jsonText = challengePlayer(webClient, idA);
+//			dc = JsonPath.parse(jsonText);
+//			Assert.assertEquals("success", dc.read("$['status']"));
+//			
+//			logout(webClient);
+//			
+//			jsonText = login(webClient, "testRetireFromGameSuccessA", "testRetireFromGameSuccessAPass");
+//			dc = JsonPath.parse(jsonText);
+//			Assert.assertEquals("success", dc.read("$['status']"));
+//			
+//			jsonText = listChallenges(webClient);
+//			dc = JsonPath.parse(jsonText);
+//			query = "challenges[?(@['challenger']==" + idB + " && @['challengee']==" + idA + " && @['status']==0)].id";
+//			jPathResult = dc.read(query);
+//			
+//			int challengeId = (Integer)((Object)jPathResult.get(0));
+//			
+//			jsonText = acceptChallenge(webClient, challengeId);
+//			dc = JsonPath.parse(jsonText);
+//			Assert.assertEquals("success", dc.read("$['status']"));
+//			
+//			jsonText = listGames(webClient);
+//			dc = JsonPath.parse(jsonText);
+//			query = "games[?(@['players'][0]==" + idB + "  && @['players'][1]==" + idA + ")].id";
+//			jPathResult = dc.read(query);
+//			int gameId = (Integer)((Object)jPathResult.get(0));
+//			
+//			jsonText = retire(webClient, gameId);
+//			dc = JsonPath.parse(jsonText);
+//			Assert.assertEquals("success", dc.read("$['status']"));
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			Assert.assertTrue(false);
+//		}
+//	}
 	
 	@Test
 	public void testRetireFromGameFailureNotMyGame() {

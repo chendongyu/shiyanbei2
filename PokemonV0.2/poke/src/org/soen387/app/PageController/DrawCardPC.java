@@ -35,7 +35,7 @@ public class DrawCardPC extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		viewHelper = new GameHelper();
-		String gameId = (String)request.getAttribute("gameId");
+		String gameId = (String)request.getAttribute("game");
 		String loginId = (String)request.getSession(true).getAttribute("loginId");	
 		String deckId = loginId;
 		
