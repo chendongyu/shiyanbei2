@@ -9,7 +9,7 @@ import org.soen387.app.viewHelper.ViewHelper;
 public class CommonUtil {
 
 	/**
-	 * TODO 判断参数是否为空
+	 * TODO 判断参数是否为空1
 	 * 
 	 * @param jsonName
 	 * @param list
