@@ -54,8 +54,7 @@ public class RegisterPC extends HttpServlet {
 			writer.close();
 		} else if(ViewUserTS.exceute(viewHelper, user)) {
 			
-			/*request.setAttribute("message", "That user has already registered.");
-			request.getRequestDispatcher("WEB-INF/jsp/fail.jsp").forward(request, response);*/
+			
 			
 			String jsonStr =Constants.FAILUREJSON_RIGESTER; // convert to json
 			PrintWriter writer = response.getWriter();

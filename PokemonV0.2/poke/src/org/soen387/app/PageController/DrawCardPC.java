@@ -38,7 +38,8 @@ public class DrawCardPC extends HttpServlet {
 		String gameId = (String)request.getAttribute("game");
 		String loginId = (String)request.getSession(true).getAttribute("loginId");	
 		String deckId = loginId;
-		String uniqId = gameId + loginId;
+		
+	//	String uniqId = gameId + loginId;
 	
 		
 	
@@ -49,13 +50,9 @@ public class DrawCardPC extends HttpServlet {
 			writer.close();
 		}
 		
-//		else if(!gameId.equals(thisGameId)) {
-//			PrintWriter writer = response.getWriter();
-//			writer.write(Constants.FAILUREJSON);
-//			writer.close();
-//		}
+
 		
-		else if(DrawCardTS.exceute(deckId)) {
+		else if(DrawCardTS.exceute(deckId, gameId)) {
 			
 			PrintWriter writer = response.getWriter();
 			writer.write(Constants.SUCCESSJSON);
