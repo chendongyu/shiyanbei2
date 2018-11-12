@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.soen387.app.TransactionScript.DrawCardTS;
 import org.soen387.app.TransactionScript.ListGamesTS;
 import org.soen387.app.TransactionScript.UploadDeckTS;
+import org.soen387.app.TransactionScript.updateUserStatusTS;
 import org.soen387.app.common.Constants;
+import org.soen387.app.rdg.ChallengeRDG;
 import org.soen387.app.viewHelper.GameHelper;
 import org.soen387.app.viewHelper.ViewHelper;
 
@@ -35,7 +37,7 @@ public class DrawCardPC extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 	
-		String gameId = (String)request.getAttribute("game");
+		String gameId = (String)request.getParameter("game");
 		String loginId = (String)request.getSession(true).getAttribute("loginId");	
 		String deckId = loginId;
 		
@@ -45,22 +47,26 @@ public class DrawCardPC extends HttpServlet {
 	
 		
 		if(loginId == null) {
+			String jsonStr = Constants.FAILUREJSON;
 			PrintWriter writer = response.getWriter();
-			writer.write(Constants.FAILUREJSON);
+			writer.write(jsonStr);
 			writer.close();
 		}
 		
 
 		
-		else if(DrawCardTS.exceute(deckId)) {
+		else if(DrawCardTS.exceute(deckId,gameId)) {
+			
+			String jsonStr =Constants.SUCCESSJSON; // convert to json
 			
 			PrintWriter writer = response.getWriter();
-			writer.write(Constants.SUCCESSJSON);
+			writer.write(jsonStr);
 			writer.close();
 		}else {
 			
+			String jsonStr = Constants.FAILUREJSON;
 			PrintWriter writer = response.getWriter();
-			writer.write(Constants.FAILUREJSON);
+			writer.write(jsonStr);
 			writer.close();
 		}
 		
