@@ -81,6 +81,28 @@ public class DeckRDG extends BaseRDG{
 		
 		return userList;
 	}
+
+	public static List<DeckRDG> findHandCard(String deckId){
+		
+		List<DeckRDG> deckList = new ArrayList<DeckRDG>();
+		
+		ResultSet resultSet = excuteSelSql("SELECT DK.NAME,DK.TYPE,DK.CARD_ID "
+				+ "FROM DECK DK WHERE DK.DECK_ID = ? AND DK.STATUS = 1 ORDER BY DK.ORDER ",deckId);
+		
+		try {
+			while(resultSet.next()) {
+				
+				DeckRDG deckRDG = new DeckRDG(resultSet.getString(1),
+						resultSet.getString(2),resultSet.getString(3));
+				deckList.add(deckRDG);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return deckList;
+	}
 	
 	public static List<DeckRDG> findAll(String deckId){
 		
@@ -141,7 +163,7 @@ public class DeckRDG extends BaseRDG{
 		DeckRDG deckRDG = null;
 			
 		ResultSet resultSet = excuteSelSql("SELECT DK.NAME,DK.TYPE,DK.CARD_ID FROM DECK DK "
-				+ "WHERE DK.DECK_ID = ? AND DK.STATUS <> 1 ORDER BY DK.ORDER limit 1;",deckId);
+				+ "WHERE DK.DECK_ID = ? AND DK.STATUS <> 1 ORDER BY DK.ORDER limit 1",deckId);
 			
 			
 			try {
@@ -149,7 +171,7 @@ public class DeckRDG extends BaseRDG{
 					
 					deckRDG = new DeckRDG(resultSet.getString(1),
 					resultSet.getString(2),resultSet.getString(3));						
-					excuteInsertSql("UPDATE DECK SET STATUS = 1 WHERE CARD_ID = ?;",resultSet.getString(3));
+					excuteInsertSql("UPDATE DECK SET STATUS = 1 WHERE CARD_ID = ?",resultSet.getString(3));
 				}						
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
