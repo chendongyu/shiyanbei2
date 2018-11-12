@@ -54,7 +54,7 @@ public class DrawCardPC extends HttpServlet {
 
 		
 		if(uniqId2.equals(gameId)) {
-			if(DrawCardTS.exceute(deckId, gameId)) {
+			if(DrawCardTS.exceute(deckId)) {
 			
 				String jsonStr =Constants.SUCCESSJSON_ACCEPTCHALLENGE; // convert to json
 				PrintWriter writer = response.getWriter();

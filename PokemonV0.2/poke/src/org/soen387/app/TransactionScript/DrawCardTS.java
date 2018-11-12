@@ -9,12 +9,9 @@ import org.soen387.app.rdg.DeckRDG;
 
 public class DrawCardTS {
 
-	public static boolean exceute(String deckId, String gameId) {
+	public static boolean exceute(String deckId) {
 		
-		ChallengeRDG challenge = ChallengeRDG.getChallengeByGameId(gameId);
-		if(!deckId.equals(challenge.getChallengee()) && !deckId.equals(challenge.getChallenger())) {
-			return false;
-		}
+
 		DeckRDG.updateCardStatus(deckId);
 		
 		
