@@ -14,14 +14,14 @@ public class BoardHelper implements ViewHelper {
 	
 	private List<PlayHelper> playHelpers;
 	
-	private PlayHelper playHelper;
+
 	
 	@Override
 	public String toJson() {
 		
 		StringBuffer playJson = new StringBuffer();
 		
-		playJson.append("{\"board\":[{\"");
+		playJson.append("{\"board\":{\"");
 		playJson.append("id");
 		playJson.append("\":");
 		playJson.append(id);
@@ -66,7 +66,7 @@ public class BoardHelper implements ViewHelper {
 		
 		
 		playJson.deleteCharAt(playJson.length()-1);
-		playJson.append("}}]}");
+		playJson.append("}}}");
 		return playJson.toString();
 	}
 

@@ -30,18 +30,18 @@ public class DrawCardPC extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-	private GameHelper viewHelper;
+
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		viewHelper = new GameHelper();
+
 		String gameId = (String)request.getAttribute("game");
 		String loginId = (String)request.getSession(true).getAttribute("loginId");	
 		String deckId = loginId;
+		String uniqId = gameId + loginId;
+	
 		
-		ListGamesTS.exceute(viewHelper, loginId);
-		
-		String thisGameId = viewHelper.getId();
+	
 		
 		if(loginId == null) {
 			PrintWriter writer = response.getWriter();
@@ -49,13 +49,13 @@ public class DrawCardPC extends HttpServlet {
 			writer.close();
 		}
 		
-		else if(!gameId.equals(thisGameId)) {
-			PrintWriter writer = response.getWriter();
-			writer.write(Constants.FAILUREJSON);
-			writer.close();
-		}
+//		else if(!gameId.equals(thisGameId)) {
+//			PrintWriter writer = response.getWriter();
+//			writer.write(Constants.FAILUREJSON);
+//			writer.close();
+//		}
 		
-		if(DrawCardTS.exceute(deckId)) {
+		else if(DrawCardTS.exceute(deckId)) {
 			
 			PrintWriter writer = response.getWriter();
 			writer.write(Constants.SUCCESSJSON);
