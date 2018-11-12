@@ -34,47 +34,35 @@ public class DrawCardPC extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String passGameId = (String) request.getParameter("game");
-		String gameId = (String) request.getSession(true).getAttribute("gameId");
+	
+		String gameId = (String)request.getAttribute("game");
 		String loginId = (String)request.getSession(true).getAttribute("loginId");	
 		String deckId = loginId;
 		
 
-		String uniqId2 = passGameId + loginId;
+	
 		
 	
 		
 		if(loginId == null) {
-			String jsonStr = Constants.FAILUREJSON_ACCEPTCHALLENGE;
 			PrintWriter writer = response.getWriter();
-			writer.write(jsonStr);
+			writer.write(Constants.FAILUREJSON);
 			writer.close();
 		}
 		
 
 		
-		if(uniqId2.equals(gameId)) {
-			if(DrawCardTS.exceute(deckId)) {
+		else if(DrawCardTS.exceute(deckId)) {
 			
-				String jsonStr =Constants.SUCCESSJSON_ACCEPTCHALLENGE; // convert to json
-				PrintWriter writer = response.getWriter();
-				writer.write(jsonStr);
-				writer.close();
-			}else {
-				
-				String jsonStr = Constants.FAILUREJSON_ACCEPTCHALLENGE;
-				PrintWriter writer = response.getWriter();
-				writer.write(jsonStr);
-				writer.close();
-			}
-		}
-		else {
-			String jsonStr = Constants.FAILUREJSON_ACCEPTCHALLENGE;
 			PrintWriter writer = response.getWriter();
-			writer.write(jsonStr);
+			writer.write(Constants.SUCCESSJSON);
+			writer.close();
+		}else {
+			
+			PrintWriter writer = response.getWriter();
+			writer.write(Constants.FAILUREJSON);
 			writer.close();
 		}
-		
 		
 	}
 

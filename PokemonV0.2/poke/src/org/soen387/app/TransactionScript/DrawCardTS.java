@@ -11,7 +11,7 @@ public class DrawCardTS {
 
 	public static boolean exceute(String deckId) {
 		
-
+	
 		DeckRDG.updateCardStatus(deckId);
 		
 		
