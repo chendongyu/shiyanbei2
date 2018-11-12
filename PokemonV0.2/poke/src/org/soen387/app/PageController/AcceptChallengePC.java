@@ -28,7 +28,7 @@ public class AcceptChallengePC extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	
-		
+	//private List<ViewHelper> viewHelper;
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -37,15 +37,29 @@ public class AcceptChallengePC extends HttpServlet {
 		String userStatus = "2";
 		String challengerId = (String) req.getSession(true).getAttribute("loginId");
 		String challengeId = req.getParameter("challenge");
+		//String challengeIdInSession = (String) req.getSession(true).getAttribute("challenge");
 		Object challengeFlag = req.getSession(true).getAttribute("challengeFlag");
 
+		
+		
 		List<DeckRDG> deckList = DeckRDG.findAll(challengerId);
-		if(Constants.CHALLENGEON.equals(challengeFlag) || deckList.size()==0) {
+		
+		
+		List<ChallengeRDG> challengeRDGs = ChallengeRDG.findAllById(challengerId);
+		
+		if(challengeRDGs.size()==0) {
 			String jsonStr = Constants.FAILUREJSON_ACCEPTCHALLENGE;
 			PrintWriter writer = resp.getWriter();
 			writer.write(jsonStr);
 			writer.close();
-		}else if(challengeId == null||challengerId == null) {
+		}
+		
+		else if(Constants.CHALLENGEON.equals(challengeFlag) || deckList.size()==0) {
+			String jsonStr = Constants.FAILUREJSON_ACCEPTCHALLENGE;
+			PrintWriter writer = resp.getWriter();
+			writer.write(jsonStr);
+			writer.close();
+		}else if(challengeId == null||challengerId == null ) {
 			String jsonStr = Constants.FAILUREJSON_ACCEPTCHALLENGE;
 			PrintWriter writer = resp.getWriter();
 			writer.write(jsonStr);
@@ -58,7 +72,7 @@ public class AcceptChallengePC extends HttpServlet {
 			updateUserStatusTS.exceute(	
 					ChallengeRDG.findPlayers(challengeId).getChallengee(), userStatus);
 			
-			req.getSession(true).setAttribute("gameId", challengeId);
+			req.getSession(true).setAttribute("gameId", (challengeId + challengerId));
 			
 			PrintWriter writer = resp.getWriter();
 			writer.write(jsonStr);

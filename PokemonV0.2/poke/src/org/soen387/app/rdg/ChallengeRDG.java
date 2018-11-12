@@ -107,6 +107,26 @@ public class ChallengeRDG extends BaseRDG {
 		return challengeRDG;
 	}
 	
+	public static List<ChallengeRDG> findAllChallenge(){
+	
+	
+		List<ChallengeRDG> challengeRDG = new ArrayList<ChallengeRDG>();
+		try {
+			ResultSet resultSet = excuteSelSql("SELECT CHALLENGE.CHALLENGE_ID,CHALLENGE.CHALLENGER, CHALLENGE.CHALLENGEE,CHALLENGE.STATUS FROM CHALLENGE");
+			
+			while (resultSet.next()) {
+				challengeRDG.add(new ChallengeRDG(resultSet.getString(1),resultSet.getString(2), resultSet.getString(3), resultSet.getString(4)));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return challengeRDG;
+	
+	
+	
+	
+	}
 	public static ChallengeRDG getChallengeAccept(String userId) {
 		
 		ChallengeRDG challengeRDG = null;

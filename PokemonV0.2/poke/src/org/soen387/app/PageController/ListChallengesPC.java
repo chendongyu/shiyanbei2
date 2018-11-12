@@ -39,8 +39,8 @@ public class ListChallengesPC extends HttpServlet {
 
 		viewHelper = new ArrayList<ViewHelper>();
 		
-		ListChallengeTS.exceute(viewHelper, loginId);
-		
+		//ListChallengeTS.exceute(viewHelper, loginId);
+		ListChallengeTS.exceute(viewHelper);
 		String playersJson = CommonUtil.changeListToJson("challenges", viewHelper);
 		
 		PrintWriter writer = resp.getWriter();

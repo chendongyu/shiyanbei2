@@ -34,39 +34,49 @@ public class RetireFromGamePC extends HttpServlet {
 
 		
 		String status = "3";
-		//String gameId = req.getParameter("game");
-	//	String thisGameId = (String) req.getSession(true).getAttribute("game");
 		
-		String gameId = (String) req.getSession(true).getAttribute("game");
-	//	String thisGameId = (String) req.getSession(true).getAttribute("gameId");
-	//	String thisGameId = (String) req.getSession(true).getAttribute("game");
+		String passGameId = (String) req.getParameter("game");
+		
+		String gameId = (String) req.getSession(true).getAttribute("gameId");
+
+		String loginId = (String) req.getSession(true).getAttribute("loginId");
 		
 		
-		
+		String uniqId2 = passGameId + loginId;
 		if(gameId == null) {
 			String jsonStr = Constants.FAILUREJSON_ACCEPTCHALLENGE;
 			PrintWriter writer = resp.getWriter();
 			writer.write(jsonStr);
 			writer.close();
 		}
-//		if(gameId == null) {
-//			String jsonStr = Constants.FAILUREJSON_ACCEPTCHALLENGE;
-//			PrintWriter writer = resp.getWriter();
-//			writer.write(jsonStr);
-//			writer.close();
-//			
-//		}
-		else if(updateChallengeStatusTS.exceute(gameId, status)){
-			String jsonStr =Constants.SUCCESSJSON_ACCEPTCHALLENGE; // convert to json
-			PrintWriter writer = resp.getWriter();
-			writer.write(jsonStr);
-			writer.close();
-		} else {
+		
+		if(uniqId2.equals(gameId)) {
+			if(updateChallengeStatusTS.exceute(passGameId, status)){
+				String jsonStr =Constants.SUCCESSJSON_ACCEPTCHALLENGE; // convert to json
+				PrintWriter writer = resp.getWriter();
+				writer.write(jsonStr);
+				writer.close();
+			} 
+			
+			
+			
+			else {
+				String jsonStr = Constants.FAILUREJSON_ACCEPTCHALLENGE;
+				PrintWriter writer = resp.getWriter();
+				writer.write(jsonStr);
+				writer.close();
+			}
+			
+		}
+		else {
 			String jsonStr = Constants.FAILUREJSON_ACCEPTCHALLENGE;
 			PrintWriter writer = resp.getWriter();
 			writer.write(jsonStr);
 			writer.close();
 		}
+		
+		
+			
 		
 		
 	}

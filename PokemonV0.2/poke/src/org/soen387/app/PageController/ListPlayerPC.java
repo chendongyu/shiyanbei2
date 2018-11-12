@@ -30,6 +30,14 @@ public class ListPlayerPC extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		viewHelper = new ArrayList<ViewHelper>();
+		
+		 String loginId = (String)req.getSession(true).getAttribute("loginId");
+			if(loginId == null) {
+				String jsonStr = Constants.FAILUREJSON;
+				PrintWriter writer = resp.getWriter();
+				writer.write(jsonStr);
+				writer.close();
+			}
 		if(ListPlayerTS.exceute(viewHelper)) {
 			
 			String playersJson = CommonUtil.changeListToJson("players", viewHelper);

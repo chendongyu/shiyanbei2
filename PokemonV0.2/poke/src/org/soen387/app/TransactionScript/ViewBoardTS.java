@@ -25,7 +25,7 @@ public class ViewBoardTS {
 		if(challenge == null || !"3".equals(challenge.getStatus())) {
 			return false;
 		}
- 
+		viewHelper.setId(challenge.getId());
 		String[] players = {challenge.getChallenger(),challenge.getChallengee()};
 		viewHelper.setPlayers(players);
 		String[] decks = {challenge.getChallenger(),challenge.getChallengee()};
