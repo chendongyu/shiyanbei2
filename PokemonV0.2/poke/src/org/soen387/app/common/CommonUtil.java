@@ -1,5 +1,7 @@
 package org.soen387.app.common;
-
+//https://stackoverflow.com/questions/18918044/how-to-escape-a-string-to-store-in-json
+//Learned how to use escape of json
+//2018/11/08
 import java.lang.reflect.Method;
 import java.util.List;
 
@@ -9,7 +11,7 @@ import org.soen387.app.viewHelper.ViewHelper;
 public class CommonUtil {
 
 	/**
-	 * TODO 判断参数是否为空1
+	 * TODO test if it's empty
 	 * 
 	 * @param jsonName
 	 * @param list
@@ -25,7 +27,7 @@ public class CommonUtil {
 	}
 	
 	/**
-	 * TODO 将ViewHelper类型的容器转换为JSON中的参数
+	 * TODO convert Viewhelper (and it's children classes) into json's parameter
 	 * 
 	 * @param jsonName
 	 * @param list
@@ -57,7 +59,7 @@ public class CommonUtil {
 	}
 	
 	/**
-	 * TODO 将ViewHelper类型的容器转换为JSON
+	 * TODO convert Viewhelper (and it's children classes) into json
 	 * 
 	 * @param jsonName
 	 * @param list
@@ -89,8 +91,8 @@ public class CommonUtil {
 	}
 	
 	/**
-	 * 利用BaseRDG子类的数据对实现ViewHelper的类进行赋值
-	 * 
+	 *
+	 * Using data from BaseRDG's children classes to set values for the classes which implemented ViewHelper
 	 * @param baseRDG
 	 * @param viewHelper
 	 */

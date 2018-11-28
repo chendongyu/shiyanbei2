@@ -1,5 +1,7 @@
 package org.soen387.app.viewHelper;
-
+//https://coderanch.com/t/508741/java/constrcting-JSON-Response-StringBuffer
+//Learned how to use json stringbuffer
+//2018/11/06
 public class UserHelper implements ViewHelper{
 
 	private String userId;

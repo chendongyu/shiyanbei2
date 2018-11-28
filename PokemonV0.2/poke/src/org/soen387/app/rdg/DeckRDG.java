@@ -158,7 +158,7 @@ public class DeckRDG extends BaseRDG{
 		return userList;
 	}
 	
-	//抓卡
+	//draw card
 	public static DeckRDG updateCardStatus(String deckId) {
 		DeckRDG deckRDG = null;
 			

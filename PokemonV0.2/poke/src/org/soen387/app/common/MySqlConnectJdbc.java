@@ -69,9 +69,11 @@ public class MySqlConnectJdbc {
 
 	    try {
 	    	//connect db, driver address
-	        Class.forName(driver); 
+	     //  Class.forName(driver); 
 	        // connect mysql by JDBC(providing username, password) 
-	        this.connect = (Connection) DriverManager.getConnection(urlStrBuf.toString(), dbUserName, dbUserPassword);
+	    //   this.connect = (Connection) DriverManager.getConnection(urlStrBuf.toString(), dbUserName, dbUserPassword);
+	       Class.forName("com.mysql.jdbc.Driver");
+	       this.connect = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3308/chen?user=chen&password=surgerin&characterEncoding=UTF-8&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&autoReconnect=true");
 	    } catch (ClassNotFoundException e) {
 	        e.printStackTrace();
 	    } catch (SQLException e) {
